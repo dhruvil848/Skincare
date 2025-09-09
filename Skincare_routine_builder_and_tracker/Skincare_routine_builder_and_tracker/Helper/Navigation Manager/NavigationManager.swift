@@ -23,4 +23,8 @@ class NavigationManager: ObservableObject {
     func pop() {
         path.removeLast()
     }
+    
+    func reset() {
+        path = NavigationPath()
+    }
 }

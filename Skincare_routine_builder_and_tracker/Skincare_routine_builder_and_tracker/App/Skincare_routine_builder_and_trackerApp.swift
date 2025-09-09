@@ -17,6 +17,7 @@ struct Skincare_routine_builder_and_trackerApp: App {
     var body: some Scene {
         WindowGroup {
             rootView(flow: appState.flow)
+                .environmentObject(navigationManager)
         }
     }
     
@@ -31,7 +32,7 @@ struct Skincare_routine_builder_and_trackerApp: App {
                     }
             }
         case .home:
-            VStack {}
+            HomeTabView(homeViewModel: appState.homeViewModel)
         case .none:
             VStack {}
         }

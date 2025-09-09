@@ -127,13 +127,13 @@ enum SkinGoal: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .glowingSkin:
-            return "ic_acne"
+            return "ic_glowing_skin"
         case .acneFree:
-            return "ic_scars"
+            return "ic_acne_free"
         case .hydration:
-            return "ic_pigmentation"
+            return "ic_hydration"
         case .antiAging:
-            return "ic_aging"
+            return "ic_normal_skin"
         }
     }
     

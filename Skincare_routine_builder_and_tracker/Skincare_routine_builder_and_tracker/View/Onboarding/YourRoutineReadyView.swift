@@ -27,19 +27,28 @@ struct YourRoutineReadyView: View {
             VStack(alignment: .leading, spacing: 10) {
                 SCText(title: "Your routine is ready!", color: .scBlack, font: .system(size: 20, weight: .semibold, design: .default), alignment: .leading)
                     .padding(.bottom, 10)
-                
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 SCText(title: "🧴 Skin Type: \(UserDefaultManager.shared.skinType.title)", color: .scBlack, font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 SCText(title: "🌿 Concerns: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .scBlack, font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading)
-                
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                                   
                 SCText(title: "⏳ Goal: \(UserDefaultManager.shared.skinGoal.title)", color: .scBlack, font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(20)
             .frame(maxWidth: .infinity)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 15))
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.scBorderGray, lineWidth: 1)
+            )
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 20)
     }
     
     private var skinTypeSection: some View {
@@ -59,11 +68,18 @@ struct YourRoutineReadyView: View {
            
             
             SCButton(title: "Start my journey") {
-                NavigationManager.shared.push(to: .yourRoutineReadyView)
+                moveToHomeScreen()
             }
             .padding(.bottom, 15)
         }
         .padding(.horizontal, 20)
+    }
+    
+    
+    func moveToHomeScreen() {
+        CoreDataManager.shared.createBaseRoutineIfNeeded()
+        UserDefaultManager.shared.isOnboardingFinished = true
+        AppState.shared.moveToHomeTab()
     }
 }
 

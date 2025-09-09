@@ -18,15 +18,25 @@ class AppState: ObservableObject {
     static let shared = AppState()
     @Published var flow: AppFlow = .none
     
+    let homeViewModel = HomeViewModel()
+    
     init() {
         updateFlow()
     }
     
     func updateFlow() {
         if UserDefaultManager.shared.isOnboardingFinished {
+            NavigationManager.shared.reset()
             flow = .home
         } else {
             flow = .onBoarding
         }
+    }
+    
+    func moveToHomeTab() {
+        NavigationManager.shared.reset()
+        TabRouter.shared.selectedTab = 0
+        
+        flow = .home
     }
 }
