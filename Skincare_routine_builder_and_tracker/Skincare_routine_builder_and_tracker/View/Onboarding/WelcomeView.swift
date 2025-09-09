@@ -48,9 +48,10 @@ struct WelcomeView: View {
                 Spacer()
                 
                 SCButton(title: "Build your routine") {
-                    
+                    NavigationManager.shared.push(to: .whatSkinTypeView)
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, 15)
             }
         }
     }

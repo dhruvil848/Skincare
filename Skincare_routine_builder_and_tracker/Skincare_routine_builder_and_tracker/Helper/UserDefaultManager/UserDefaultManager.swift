@@ -11,7 +11,7 @@ import Foundation
 enum UserDefaultKey {
     static let isOnboardingFinished = "isOnboardingFinished"
     static let skinType = "skinType"
-    static let skinConcern = "skinConcern"
+    static let skinConcerns = "skinConcerns"
     static let skinGoal = "skinGoal"
 }
 
@@ -39,13 +39,16 @@ class UserDefaultManager {
         }
     }
     
-    var skinConcern: SkinConcern {
+    // MARK: - Goal Array
+    var skinConcerns: [SkinConcern] {
         get {
-            let rawValue = defaults.string(forKey: UserDefaultKey.skinConcern) ?? SkinConcern.acne.rawValue
-            return SkinConcern(rawValue: rawValue) ?? .acne
+            let rawValues = defaults.array(forKey: UserDefaultKey.skinConcerns) as? [String] ?? []
+            let skinConcerns = rawValues.compactMap { SkinConcern(rawValue: $0) }
+            return !skinConcerns.isEmpty ? skinConcerns : [SkinConcern.acne]
         }
         set {
-            defaults.set(newValue.rawValue, forKey: UserDefaultKey.skinType)
+            let rawValues = newValue.map { $0.rawValue }
+            defaults.set(rawValues, forKey: UserDefaultKey.skinConcerns)
         }
     }
  

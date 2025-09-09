@@ -51,15 +51,29 @@ enum SkinType: String, CaseIterable, Identifiable {
     
     case dry = "Dry"
     case oily = "Oily"
-    case normal = "Normal"
     case combination = "Combination"
-    
+    case normal = "Normal"
+
     var id: String { return rawValue }
 }
 
 enum SkinConcern: String, CaseIterable, Identifiable {
     
     var title: String {
+        switch self {
+        case .acne:
+            return "Acne"
+        case .scar:
+            return "Scars"
+        case .pigmentation:
+            return "Pigmentation"
+        case .aging:
+            return "Aging"
+        }
+    }
+    
+    
+    var icon: String {
         switch self {
         case .acne:
             return "ic_acne"
@@ -73,24 +87,10 @@ enum SkinConcern: String, CaseIterable, Identifiable {
     }
     
     
-    var icon: String {
-        switch self {
-        case .acne:
-            return "Dry"
-        case .scar:
-            return "Oily"
-        case .pigmentation:
-            return "Combination"
-        case .aging:
-            return "Normal"
-        }
-    }
-    
-    
-    case acne = "Dry"
-    case scar = "Oily"
-    case pigmentation = "Normal"
-    case aging = "Combination"
+    case acne = "Acne"
+    case scar = "Scars"
+    case pigmentation = "Pigmentation"
+    case aging = "Aging"
     
     var id: String { return rawValue }
 }

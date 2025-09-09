@@ -8,5 +8,8 @@
 import Foundation
 
 enum NavigationDestination: Hashable {
-    
+    case whatSkinTypeView
+    case whatSkinConcernView
+    case whatGoalView
+    case yourRoutineReadyView
 }

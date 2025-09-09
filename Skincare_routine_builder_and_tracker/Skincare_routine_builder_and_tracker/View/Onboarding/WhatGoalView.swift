@@ -1,14 +1,14 @@
 //
-//  WhatSkinTypeView.swift
+//  WhatGoalView.swift
 //  Skincare_routine_builder_and_tracker
 //
-//  Created by Dhruvil Moradiya on 08/09/25.
+//  Created by Dhruvil Moradiya on 09/09/25.
 //
 
 import SwiftUI
 
-struct WhatSkinTypeView: View {
-    @AppStorage(UserDefaultKey.skinType) var skinType: SkinType = UserDefaultManager.shared.skinType
+struct WhatGoalView: View {
+    @AppStorage(UserDefaultKey.skinGoal) var skinGoal: SkinGoal = UserDefaultManager.shared.skinGoal
     
     var body: some View {
         ZStack {
@@ -20,41 +20,45 @@ struct WhatSkinTypeView: View {
                 footerSection
             }
         }
-        .toolbar(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden()
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var headerSection: some View {
-        VStack(alignment: .center, spacing: 0) {
-            SCProgressBarView(progress: 0.333, step: "1/3")
+        VStack(alignment: .leading, spacing: 0) {
+            SCProgressBarView(progress: 1, step: "3/3")
+            
+            SCBorderButton {
+                NavigationManager.shared.pop()
+            }
+            .padding(.leading, 20)
         }
     }
     
     private var skinTypeSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             
-            SCText(title: "What's your skin type?", color: .scBlack, font: .system(size: 26, weight: .semibold), alignment: .leading)
+            SCText(title: "What’s your main goal?", color: .scBlack, font: .system(size: 26, weight: .semibold), alignment: .leading)
                 .padding(.top, 50)
                 .padding(.bottom, 5)
             
-            SCText(title: "This helps us personalize your skincare routine for your needs.", color: .scBlack, font: .system(size: 14, weight: .regular), alignment: .leading)
+            SCText(title: "Choose the result you want to focus on first.", color: .scBlack, font: .system(size: 14, weight: .regular), alignment: .leading)
                 .padding(.bottom, 50)
             
-            
             VStack(alignment: .center, spacing: 17) {
-                ForEach(SkinType.allCases, id: \.self) { type in
-                    let borderColor: Color = skinType != type ? .scBorderGray : Color.scPurple
+                ForEach(SkinGoal.allCases, id: \.self) { goal in
+                    let borderColor: Color = skinGoal != goal ? .scBorderGray : Color.scPurple
                     
                     VStack(alignment: .leading, spacing: 10) {
                         HStack(alignment: .center, spacing: 20) {
-                            Image(type.icon)
+                            Image(goal.icon)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 35, height: 35)
                             
                             VStack(alignment: .leading, spacing: 5)  {
                                 SCText(
-                                    title: type.title,
+                                    title: goal.title,
                                     color: Color.scBlack,
                                     font: .system(size: 16, weight: .semibold, design: .default),
                                     alignment: .leading
@@ -62,7 +66,7 @@ struct WhatSkinTypeView: View {
                                 
                                 
                                 SCText(
-                                    title: type.description,
+                                    title: goal.description,
                                     color: Color(hex: "424242"),
                                     font: .system(size: 13, weight: .regular, design: .default),
                                     alignment: .leading
@@ -82,7 +86,7 @@ struct WhatSkinTypeView: View {
                             .stroke(borderColor, lineWidth: 1)
                     )
                     .onTapGesture {
-                        skinType = type
+                        skinGoal = goal
                     }
                 }
             }
@@ -96,7 +100,7 @@ struct WhatSkinTypeView: View {
         VStack(alignment: .center, spacing: 0) {
             
             SCButton(title: "Continue") {
-                NavigationManager.shared.push(to: .whatSkinConcernView)
+                NavigationManager.shared.push(to: .yourRoutineReadyView)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 15)
@@ -105,7 +109,5 @@ struct WhatSkinTypeView: View {
 }
 
 #Preview {
-    NavigationStack {
-        WhatSkinTypeView()
-    }
+    WhatGoalView()
 }

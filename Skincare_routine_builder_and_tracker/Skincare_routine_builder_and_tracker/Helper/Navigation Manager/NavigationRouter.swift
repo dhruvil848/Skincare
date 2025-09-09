@@ -12,7 +12,17 @@ enum NavigationRouter {
     @ViewBuilder
     static func destinationView(destination: NavigationDestination) -> some View {
         switch destination {
-        default: VStack { }
+        case .whatSkinTypeView:
+            WhatSkinTypeView()
+            
+        case .whatSkinConcernView:
+            WhatSkinConcernView()
+            
+        case .whatGoalView:
+            WhatGoalView()
+            
+        case .yourRoutineReadyView:
+            YourRoutineReadyView()
         }
     }
 }
