@@ -37,6 +37,7 @@ struct HomeView: View {
                 headerSection
                 streakSection
                 todayRoutineSection
+                dailyTipSection
             }
             .frame(maxWidth: .infinity)
         }
@@ -45,13 +46,13 @@ struct HomeView: View {
     @ViewBuilder
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SCText(title: "Hi, ready for your routine? 👋🏻", color: .scBlack, font: .system(size: 20, weight: .semibold, design: .rounded), alignment: .leading)
+            SCText(title: "Hi, \(viewModel.greetingMessage())", color: .scBlack, font: .system(size: 20, weight: .bold, design: .rounded), alignment: .leading)
                 .padding(.bottom, 15)
             
-            SCText(title: "🔴  Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .scBlack, font: .system(size: 14, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.1)
-                .padding(.bottom, 6)
+            SCText(title: "Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .init(hex: "3D3D3D"), font: .system(size: 16, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.2)
+                .padding(.bottom, 5)
             
-            SCText(title: "💁🏻‍♀️  Let’s care of your skin today!!", color: .scBlack, font: .system(size: 14, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.1)
+            SCText(title: "Let’s care of your skin today!! 🚀 ", color: .init(hex: "3D3D3D"), font: .system(size: 16, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.2)
         }
         .padding(.horizontal, paddingHorizontal)
         .padding(.top, 15)
@@ -63,15 +64,21 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 12) {
                 SCText(title: "🔥 Streak", color: .scBlack, font: .system(size: 18, weight: .medium, design: .rounded), alignment: .leading)
                 
+                let textColor = viewModel.scDay?.isCompleted == true ? Color.scPurple : Color.gray
                 HStack(alignment: .center, spacing: 15) {
-                    SCText(title: "7 Days", color: .scPurple, font: .system(size: 20, weight: .bold, design: .default), alignment: .leading)
+                    SCText(title: "\(viewModel.scTemplateDay?.streak ?? 0) Days", color: textColor, font: .system(size: 20, weight: .bold, design: .default), alignment: .leading)
                     
-                    SCStreakProgressBarView(progress: 0.8)
+                    
+                    let totalDays = 7  // always a week
+                    let progress = Float(CoreDataManager.shared.getCompletedDaysThisWeek()) / Float(totalDays)
+                    SCStreakProgressBarView(progress: progress)
+                        .animation(.easeInOut, value: viewModel.scTemplateDay?.streak)
                 }
                 
-                SCText(title: "You are on the right track, keep it up.", color: .init(hex: "707070"), font: .system(size: 14, weight: .regular, design: .default), alignment: .leading)
+                SCText(title: viewModel.streakMessage(), color: .init(hex: "707070"), font: .system(size: 14, weight: .regular, design: .default), alignment: .leading)
             }
-            .padding(20)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 17)
         }
         .background(sectionBackgroundColor)
         .cornerRadius(sectionCornerRadius)
@@ -86,13 +93,14 @@ struct HomeView: View {
     @ViewBuilder
     private var todayRoutineSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            SCText(title: " Today's Routine", color: .scBlack, font: .system(size: 18, weight: .semibold, design: .rounded), alignment: .leading, kerning: -0.01)
+            SCText(title: "Today's Routine", color: .scBlack, font: .system(size: 18, weight: .semibold, design: .rounded), alignment: .leading, kerning: -0.01)
             
             
-            if let routines = viewModel.scDay?.routines as? [SCRoutine] {
-                
-                ForEach(0..<routines.count, id: \.self) { index in
-                    routineCards(routine: routines[index])
+            if let routines = viewModel.scDay?.routines?.array as? [SCRoutine] {
+                VStack(alignment: .leading, spacing: 25) {
+                    ForEach(0..<routines.count, id: \.self) { index in
+                        routineCards(routine: routines[index])
+                    }
                 }
             }
             
@@ -101,17 +109,15 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    @ViewBuilder
-    private func routineCards(routine: SCRoutine) -> some View {
+    private var dailyTipSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .center, spacing: 10) {
-                    
-                }
+            VStack(alignment: .leading, spacing: 15) {
+                SCText(title: "🌸️  Daily Tip", color: .scBlack, font: .system(size: 18, weight: .medium, design: .rounded), alignment: .leading, kerning: 0)
                 
-                
+                SCText(title: tipOfTheDay, color: .init(hex: "333333"), font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading, kerning: 0)
             }
-            .padding(20)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 17)
         }
         .background(sectionBackgroundColor)
         .cornerRadius(sectionCornerRadius)
@@ -121,5 +127,96 @@ struct HomeView: View {
         )
         .padding(.horizontal, paddingHorizontal)
         .frame(maxWidth: .infinity)
+    }
+    
+}
+
+extension HomeView {
+    @ViewBuilder
+    private func routineCards(routine: SCRoutine) -> some View {
+        let routineSteps = routine.steps?.array as? [SCRoutineStep] ?? []
+        let completedPecentage = Int(CoreDataManager.shared.routineCompletionPercentage(for: routine))
+        
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 20) {
+                
+                /// Title section
+                HStack(alignment: .center, spacing: 0) {
+                    Button {
+                        
+                    } label: {
+                        HStack(alignment: .center, spacing: 10) {
+                            SCText(title: routine.name ?? "-", color: .scBlack, font: .system(size: 18, weight: .semibold, design: .rounded), alignment: .leading)
+                            
+                            Image("ic_edit")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    HStack(alignment: .center, spacing: 0) {
+                        SCText(title: "\(completedPecentage)% complete", color: .scPurple, font: .system(size: 14, weight: .regular, design: .rounded), alignment: .center)
+                            .padding(.horizontal, 13)
+                    }
+                    .frame(height: 28)
+                    .background(Color.init(hex: "FFF6F9"))
+                    .cornerRadius(28/2)
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                /// Routine step section
+                VStack(alignment: .leading, spacing: 13) {
+                    ForEach(0..<routineSteps.count, id: \.self) { index in
+                        let step = routineSteps[index]
+                        
+                        routineStepRow(
+                            step: step,
+                            onSelect: {
+                                viewModel.btnSelectRoutine(routine: routine, step: step)
+                            }
+                        )
+                    }
+                }
+                .padding(.horizontal, 2)
+            }
+            .padding(20)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(sectionBackgroundColor)
+        .cornerRadius(sectionCornerRadius)
+        .overlay(
+            RoundedRectangle(cornerRadius: sectionCornerRadius)
+                .stroke(sectionBorderColor, lineWidth: 1)
+        )
+        .frame(maxWidth: .infinity)
+    }
+    
+    
+    @ViewBuilder
+    private func routineStepRow(step: SCRoutineStep, onSelect: @escaping (() -> Void)) -> some View {
+        let textColor: Color = step.isCompleted ? Color.gray : Color.scBlack
+        let imageName: String = step.isCompleted ? "ic_check_square"  : "ic_uncheck_square"
+        
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                onSelect()
+            } label: {
+                HStack(alignment: .center, spacing: 15) {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                    
+                    SCText(title: step.productName ?? "-", color: textColor, font: .system(size: 16.5, weight: .medium, design: .rounded), alignment: .leading, italic: step.isCompleted)
+                }
+                .background(Color.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

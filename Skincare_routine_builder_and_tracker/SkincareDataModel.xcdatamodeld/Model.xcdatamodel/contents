@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="SCDay" representedClassName="SCDay" syncable="YES" codeGenerationType="class">
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="routines" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SCRoutine" inverseName="day" inverseEntity="SCRoutine"/>
     </entity>
     <entity name="SCRoutine" representedClassName="SCRoutine" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isCompleted" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="day" maxCount="1" deletionRule="Nullify" destinationEntity="SCDay" inverseName="routines" inverseEntity="SCDay"/>
-        <relationship name="steps" toMany="YES" deletionRule="Nullify" destinationEntity="SCRoutineStep" inverseName="routine" inverseEntity="SCRoutineStep"/>
+        <relationship name="steps" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SCRoutineStep" inverseName="routine" inverseEntity="SCRoutineStep"/>
     </entity>
     <entity name="SCRoutineStep" representedClassName="SCRoutineStep" syncable="YES" codeGenerationType="class">
-        <attribute name="displayOrder" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="frequency" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="displayOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="productName" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
         <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SCRoutine" inverseName="steps" inverseEntity="SCRoutine"/>
     </entity>
     <entity name="SCTemplateDay" representedClassName="SCTemplateDay" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="streak" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="streak" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="routines" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SCTemplateRoutine" inverseName="day" inverseEntity="SCTemplateRoutine"/>
     </entity>
     <entity name="SCTemplateRoutine" representedClassName="SCTemplateRoutine" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="day" maxCount="1" deletionRule="Nullify" destinationEntity="SCTemplateDay" inverseName="routines" inverseEntity="SCTemplateDay"/>
         <relationship name="steps" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SCTemplateRoutineStep" inverseName="routine" inverseEntity="SCTemplateRoutineStep"/>
     </entity>
     <entity name="SCTemplateRoutineStep" representedClassName="SCTemplateRoutineStep" syncable="YES" codeGenerationType="class">
-        <attribute name="displayOrder" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="frequency" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="displayOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="productName" attributeType="String"/>
-        <relationship name="routine" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SCTemplateRoutine" inverseName="steps" inverseEntity="SCTemplateRoutine"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <relationship name="routine" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="SCTemplateRoutine" inverseName="steps" inverseEntity="SCTemplateRoutine"/>
     </entity>
 </model>

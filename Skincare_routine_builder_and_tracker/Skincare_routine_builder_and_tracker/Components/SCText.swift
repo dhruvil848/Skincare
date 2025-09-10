@@ -15,14 +15,18 @@ struct SCText: View {
     var lineLimit: Int? = nil
     var alignment: TextAlignment = .center
     var kerning: CGFloat = 0
+    var italic: Bool = false
     
     var body: some View {
         Text(title)
+            .strikethrough(italic, color: .gray)
             .font(font)
             .foregroundStyle(color)
             .multilineTextAlignment(alignment)
             .lineLimit(lineLimit)
             .kerning(kerning)
+            
+            
     }
 }
 
