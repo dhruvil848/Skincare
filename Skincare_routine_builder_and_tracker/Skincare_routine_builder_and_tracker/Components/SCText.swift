@@ -14,6 +14,7 @@ struct SCText: View {
     let font: Font
     var lineLimit: Int? = nil
     var alignment: TextAlignment = .center
+    var kerning: CGFloat = 0
     
     var body: some View {
         Text(title)
@@ -21,6 +22,7 @@ struct SCText: View {
             .foregroundStyle(color)
             .multilineTextAlignment(alignment)
             .lineLimit(lineLimit)
+            .kerning(kerning)
     }
 }
 

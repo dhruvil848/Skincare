@@ -33,9 +33,10 @@ struct HomeView: View {
     @ViewBuilder
     private var homeSection: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 30) {
+            VStack(alignment: .leading, spacing: 25) {
                 headerSection
                 streakSection
+                todayRoutineSection
             }
             .frame(maxWidth: .infinity)
         }
@@ -44,22 +45,23 @@ struct HomeView: View {
     @ViewBuilder
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SCText(title: "Hi, there  👋🏻", color: .scBlack, font: .system(size: 24, weight: .semibold, design: .none), alignment: .leading)
-                .padding(.bottom, 18)
+            SCText(title: "Hi, ready for your routine? 👋🏻", color: .scBlack, font: .system(size: 20, weight: .semibold, design: .rounded), alignment: .leading)
+                .padding(.bottom, 15)
             
-            SCText(title: "🔴  Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .scBlack, font: .system(size: 15, weight: .medium, design: .none), alignment: .leading)
+            SCText(title: "🔴  Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .scBlack, font: .system(size: 14, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.1)
                 .padding(.bottom, 6)
             
-            SCText(title: "💁🏻‍♀️  Let’s care of your skin today!!", color: .scBlack, font: .system(size: 15, weight: .medium, design: .none), alignment: .leading)
+            SCText(title: "💁🏻‍♀️  Let’s care of your skin today!!", color: .scBlack, font: .system(size: 14, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.1)
         }
         .padding(.horizontal, paddingHorizontal)
+        .padding(.top, 15)
     }
     
     @ViewBuilder
     private var streakSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 12) {
-                SCText(title: "🔥 Streak", color: .scBlack, font: .system(size: 18, weight: .medium, design: .default), alignment: .leading)
+                SCText(title: "🔥 Streak", color: .scBlack, font: .system(size: 18, weight: .medium, design: .rounded), alignment: .leading)
                 
                 HStack(alignment: .center, spacing: 15) {
                     SCText(title: "7 Days", color: .scPurple, font: .system(size: 20, weight: .bold, design: .default), alignment: .leading)
@@ -67,7 +69,7 @@ struct HomeView: View {
                     SCStreakProgressBarView(progress: 0.8)
                 }
                 
-                SCText(title: "You are on the right track, keep it up.", color: .init(hex: "707070"), font: .system(size: 16, weight: .regular, design: .default), alignment: .leading)
+                SCText(title: "You are on the right track, keep it up.", color: .init(hex: "707070"), font: .system(size: 14, weight: .regular, design: .default), alignment: .leading)
             }
             .padding(20)
         }
@@ -76,6 +78,46 @@ struct HomeView: View {
         .overlay(
             RoundedRectangle(cornerRadius: sectionCornerRadius)
                 .stroke(sectionBorderColor, lineWidth: 1) // border color and width
+        )
+        .padding(.horizontal, paddingHorizontal)
+        .frame(maxWidth: .infinity)
+    }
+    
+    @ViewBuilder
+    private var todayRoutineSection: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            SCText(title: " Today's Routine", color: .scBlack, font: .system(size: 18, weight: .semibold, design: .rounded), alignment: .leading, kerning: -0.01)
+            
+            
+            if let routines = viewModel.scDay?.routines as? [SCRoutine] {
+                
+                ForEach(0..<routines.count, id: \.self) { index in
+                    routineCards(routine: routines[index])
+                }
+            }
+            
+        }
+        .padding(.horizontal, paddingHorizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    @ViewBuilder
+    private func routineCards(routine: SCRoutine) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 10) {
+                    
+                }
+                
+                
+            }
+            .padding(20)
+        }
+        .background(sectionBackgroundColor)
+        .cornerRadius(sectionCornerRadius)
+        .overlay(
+            RoundedRectangle(cornerRadius: sectionCornerRadius)
+                .stroke(sectionBorderColor, lineWidth: 1)
         )
         .padding(.horizontal, paddingHorizontal)
         .frame(maxWidth: .infinity)

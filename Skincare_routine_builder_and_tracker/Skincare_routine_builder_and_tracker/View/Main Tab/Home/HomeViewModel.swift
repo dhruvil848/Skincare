@@ -17,5 +17,8 @@ class HomeViewModel: ObservableObject {
     // MARK: -
     func intialize() {
         scDay = CoreDataManager.shared.getDailyRoutine(for: todayDate)
+        
+        print("Date: \(scDay?.date)")
+        print("Routine: \(scDay?.routines)")
     }
 }

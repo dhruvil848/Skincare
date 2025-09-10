@@ -35,48 +35,59 @@ final class CoreDataManager {
         guard context.hasChanges else { return }
         do {
             try context.save()
+            print("✅ Context saved")
         } catch {
-            print("Failed to save context: \(error)")
+            print("❌ Failed to save context: \(error.localizedDescription)")
         }
     }
     
+    // MARK: - Fetch or Create Daily Routine
     func getDailyRoutine(for date: Date) -> SCDay {
         let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: date)
-        
-        // 1. Check if day already exists
+        let start = calendar.startOfDay(for: date)
+        let end = calendar.date(byAdding: .day, value: 1, to: start)!
+
         let request: NSFetchRequest<SCDay> = SCDay.fetchRequest()
-        request.predicate = NSPredicate(format: "date == %@", startOfDay as NSDate)
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end as NSDate)
         request.fetchLimit = 1
-        
-        if let existingDay = try? context.fetch(request).first {
-            return existingDay
+
+        do {
+            if let existingDay = try context.fetch(request).first {
+                return existingDay
+            } else {
+                return generateDailyRoutine(for: date)
+            }
+        } catch {
+            print("❌ Failed to fetch SCDay: \(error)")
+            return generateDailyRoutine(for: date)
         }
-        
-        // 2. Day does not exist → create new
-        return generateDailyRoutine(for: date)
     }
 
     // MARK: - Create Base Routines (After Onboarding)
     func createBaseRoutineIfNeeded() {
-        let fetchRequest: NSFetchRequest<SCRoutineTemplate> = SCRoutineTemplate.fetchRequest()
+        let fetchRequest: NSFetchRequest<SCTemplateDay> = SCTemplateDay.fetchRequest()
 
         do {
             let count = try context.count(for: fetchRequest)
             if count == 0 {
                 // Morning Routine
-                let morning = SCRoutineTemplate(context: context)
+                
+                let day = SCTemplateDay(context: context)
+                day.id = UUID()
+                day.streak = 0
+                
+                let morning = SCTemplateRoutine(context: context)
                 morning.id = UUID()
                 morning.name = "Morning"
                 
-                let cleanser = SCRoutineStepTemplate(context: context)
+                let cleanser = SCTemplateRoutineStep(context: context)
                 cleanser.id = UUID()
                 cleanser.displayOrder = 0
                 cleanser.productName = "Cleanser"
                 cleanser.frequency = "Everyday"
                 morning.addToSteps(cleanser)
 
-                let moisturizer = SCRoutineStepTemplate(context: context)
+                let moisturizer = SCTemplateRoutineStep(context: context)
                 moisturizer.id = UUID()
                 moisturizer.displayOrder = 1
                 moisturizer.productName = "Moisturizer"
@@ -84,65 +95,73 @@ final class CoreDataManager {
                 morning.addToSteps(moisturizer)
 
                 // Evening Routine
-                let evening = SCRoutineTemplate(context: context)
+                let evening = SCTemplateRoutine(context: context)
                 evening.id = UUID()
                 evening.name = "Evening"
                 
-                let nightCleanser = SCRoutineStepTemplate(context: context)
+                let nightCleanser = SCTemplateRoutineStep(context: context)
                 nightCleanser.id = UUID()
                 nightCleanser.displayOrder = 0
                 nightCleanser.productName = "Cleanser"
                 nightCleanser.frequency = "Everyday"
                 evening.addToSteps(nightCleanser)
 
-                let treatment = SCRoutineStepTemplate(context: context)
+                let treatment = SCTemplateRoutineStep(context: context)
                 treatment.id = UUID()
                 treatment.displayOrder = 1
                 treatment.productName = "Treatment"
                 treatment.frequency = "Alternate"
                 evening.addToSteps(treatment)
-
+                
+                morning.day = day
+                evening.day = day
+                
+                day.routines = [morning, evening]
                 saveContext()
-                print("Base routines created.")
+                print("✅ Base routines created.")
             }
         } catch {
-            print("Error checking base routines: \(error)")
+            print("❌ Error checking base routines: \(error)")
         }
     }
 
     // MARK: - Generate Daily Routine From Template
-    
     func generateDailyRoutine(for date: Date) -> SCDay {
         let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: date)
+        let start = calendar.startOfDay(for: date)
+        let end = calendar.date(byAdding: .day, value: 1, to: start)!
 
-        // Check if day exists
+        // Check if day already exists
         let request: NSFetchRequest<SCDay> = SCDay.fetchRequest()
-        request.predicate = NSPredicate(format: "date == %@", startOfDay as NSDate)
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end as NSDate)
         request.fetchLimit = 1
 
         if let day = try? context.fetch(request).first {
             return day
         }
 
-        // Create day
-        let newDay = SCDay(context: context)
-        newDay.id = UUID()
-        newDay.date = startOfDay
+        // Ensure templates exist
+        createBaseRoutineIfNeeded()
 
-        // Copy routines from template
-        let templateRequest: NSFetchRequest<SCRoutineTemplate> = SCRoutineTemplate.fetchRequest()
-        if let templates = try? context.fetch(templateRequest) {
-            for tmpl in templates {
+        do {
+            let templateDay = try context.fetch(SCTemplateDay.fetchRequest())
+            let templateRoutines = templateDay.first?.routines as? [SCTemplateRoutine] ?? []
+            
+            // Create new day
+            let newDay = SCDay(context: context)
+            newDay.id = UUID()
+            newDay.date = start
+
+            // Copy routines from template
+            for tmpl in templateRoutines {
                 let routine = SCRoutine(context: context)
                 routine.id = UUID()
                 routine.name = tmpl.name
                 routine.isCompleted = false
                 routine.day = newDay
 
-                if let steps = tmpl.steps?.array as? [SCRoutineStepTemplate] {
+                if let steps = tmpl.steps?.array as? [SCTemplateRoutineStep] {
                     for stepTemplate in steps {
-                        // Handle frequency check here
                         if shouldIncludeStep(stepTemplate, for: date) {
                             let step = SCRoutineStep(context: context)
                             step.id = UUID()
@@ -154,23 +173,33 @@ final class CoreDataManager {
                         }
                     }
                 }
+                
+                newDay.addToRoutines(routine)
             }
-        }
+            
+            saveContext()
+            return newDay
 
-        saveContext()
-        return newDay
+        } catch {
+            print("❌ Failed to fetch templates: \(error)")
+            // Return an empty newDay to avoid crash
+            let fallbackDay = SCDay(context: context)
+            fallbackDay.id = UUID()
+            fallbackDay.date = start
+            saveContext()
+            return fallbackDay
+        }
     }
 
-    private func shouldIncludeStep(_ template: SCRoutineStepTemplate, for date: Date) -> Bool {
+    // MARK: - Step Inclusion Rules
+    private func shouldIncludeStep(_ template: SCTemplateRoutineStep, for date: Date) -> Bool {
         switch template.frequency {
         case "Everyday":
             return true
         case "Alternate":
-            // Simple example: include only on even days
             let day = Calendar.current.component(.day, from: date)
             return day % 2 == 0
         case "Weekly":
-            // Example: include only on Sundays
             let weekday = Calendar.current.component(.weekday, from: date)
             return weekday == 1
         default:
