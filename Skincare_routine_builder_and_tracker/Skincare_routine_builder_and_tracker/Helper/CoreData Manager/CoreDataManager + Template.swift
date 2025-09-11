@@ -12,12 +12,11 @@ extension CoreDataManager {
     func fetchTemplateDay() -> SCTemplateDay {
         var templateDay: SCTemplateDay?
         let templateFetch: NSFetchRequest<SCTemplateDay> = SCTemplateDay.fetchRequest()
-        templateFetch.fetchLimit = 1
-        templateDay = try? context.fetch(templateFetch).first
+        let arrTemplates = try? context.fetch(templateFetch)
         
-        if templateDay == nil {
+        if let first = arrTemplates?.first {
             createBaseRoutineIfNeeded()
-            templateDay = try? context.fetch(templateFetch).first
+            templateDay = first
         }
         
         guard let baseTemplateDay = templateDay else {

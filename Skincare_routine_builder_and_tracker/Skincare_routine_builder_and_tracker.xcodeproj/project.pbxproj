@@ -44,6 +44,8 @@
 		04DF44772E6F217B0027DD7E /* WhatSkinTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44762E6F217B0027DD7E /* WhatSkinTypeView.swift */; };
 		04DF44792E6F21A40027DD7E /* SCProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44782E6F21A40027DD7E /* SCProgressBarView.swift */; };
 		04DF447B2E6F24980027DD7E /* OnboardingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF447A2E6F24980027DD7E /* OnboardingEnums.swift */; };
+		04FF175F2E732587005EEAE9 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF175E2E732587005EEAE9 /* AddProductView.swift */; };
+		04FF17612E73259D005EEAE9 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF17602E73259D005EEAE9 /* AddProductViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		04DF44762E6F217B0027DD7E /* WhatSkinTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatSkinTypeView.swift; sourceTree = "<group>"; };
 		04DF44782E6F21A40027DD7E /* SCProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCProgressBarView.swift; sourceTree = "<group>"; };
 		04DF447A2E6F24980027DD7E /* OnboardingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEnums.swift; sourceTree = "<group>"; };
+		04FF175E2E732587005EEAE9 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		04FF17602E73259D005EEAE9 /* AddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 		04D9A5AD2E706C5C002F53E5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				04FF175D2E732571005EEAE9 /* Add Product */,
 				04BAB3942E725D54001AA3D8 /* Customise routine */,
 				04D9A5AE2E706C66002F53E5 /* HomeView.swift */,
 				04D9A5B62E706DF5002F53E5 /* HomeViewModel.swift */,
@@ -259,8 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				04DF445C2E6F1A030027DD7E /* NavigationDestination.swift */,
-				04DF445D2E6F1A030027DD7E /* NavigationManager.swift */,
 				04DF445E2E6F1A030027DD7E /* NavigationRouter.swift */,
+				04DF445D2E6F1A030027DD7E /* NavigationManager.swift */,
 			);
 			path = "Navigation Manager";
 			sourceTree = "<group>";
@@ -320,13 +325,22 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		04FF175D2E732571005EEAE9 /* Add Product */ = {
+			isa = PBXGroup;
+			children = (
+				04FF175E2E732587005EEAE9 /* AddProductView.swift */,
+				04FF17602E73259D005EEAE9 /* AddProductViewModel.swift */,
+			);
+			path = "Add Product";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
 		0BAC3FBB8FF342483DBDE67E /* Build Target */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "-c \"${AE76EDB}\"";
-			buildConfigurationList = 04BAB3952E725D54001AA3D8 /* Build configuration list */;
+			buildConfigurationList = 04BAB3952E725D54001AA3D8 /* Build configuration list for PBXLegacyTarget "Build Target" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/sh;
@@ -420,6 +434,7 @@
 				04D9A5B72E706DF5002F53E5 /* HomeViewModel.swift in Sources */,
 				04CDE4E02E71C0150003DA0E /* CoreDataManager + Template.swift in Sources */,
 				04D9A5BD2E706ECD002F53E5 /* ProfileView.swift in Sources */,
+				04FF175F2E732587005EEAE9 /* AddProductView.swift in Sources */,
 				04DF44642E6F1A030027DD7E /* NavigationDestination.swift in Sources */,
 				04DF44752E6F1F490027DD7E /* SCText.swift in Sources */,
 				04DF445B2E6F19E40027DD7E /* AppState.swift in Sources */,
@@ -430,6 +445,7 @@
 				04DF44662E6F1A030027DD7E /* NavigationRouter.swift in Sources */,
 				04DF44712E6F1CC70027DD7E /* Color + Custom.swift in Sources */,
 				04BAB3972E725D68001AA3D8 /* CustomiseRoutineView.swift in Sources */,
+				04FF17612E73259D005EEAE9 /* AddProductViewModel.swift in Sources */,
 				04D9A5C02E70710E002F53E5 /* Routine.swift in Sources */,
 				04DF447B2E6F24980027DD7E /* OnboardingEnums.swift in Sources */,
 				04DF44472E6F19910027DD7E /* WelcomeView.swift in Sources */,
@@ -660,7 +676,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		04BAB3952E725D54001AA3D8 /* Build configuration list */ = {
+		04BAB3952E725D54001AA3D8 /* Build configuration list for PBXLegacyTarget "Build Target" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04BAB3922E725CBB001AA3D8 /* Debug */,

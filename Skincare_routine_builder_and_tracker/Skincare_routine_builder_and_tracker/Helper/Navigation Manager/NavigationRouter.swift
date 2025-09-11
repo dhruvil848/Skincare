@@ -29,6 +29,9 @@ enum NavigationRouter {
         // Main tab
         case .customiseRoutineView:
             CustomiseRoutineView()
+            
+        case .addProductView(let destination):
+            AddProductView(viewModel: destination.viewModel)
         }
     }
 }

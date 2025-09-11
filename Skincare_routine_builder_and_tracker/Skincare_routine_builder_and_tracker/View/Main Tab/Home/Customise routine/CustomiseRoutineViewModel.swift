@@ -5,12 +5,13 @@
 //  Created by Dhruvil Moradiya on 11/09/25.
 //
 
-import SwiftUI
+import Foundation
 
 class CustomiseRoutineViewModel: ObservableObject {
-
+    
     // MARK: - Variables
-    @Published var scTemplateDay: SCTemplateDay?
+    @Published var scDay: SCTemplateDay?    // Editable copy for UI
+    @Published var refreshId: UUID = UUID()
     
     // MARK: - Methods
     func onAppear() {
@@ -22,7 +23,22 @@ class CustomiseRoutineViewModel: ObservableObject {
     }
     
     func fetchTodayRoutine() {
-        scTemplateDay = CoreDataManager.shared.fetchTemplateDay()
+        scDay = CoreDataManager.shared.fetchTemplateDay()
+        refreshId = UUID()
+    }
+    
+    func moveStep(in routine: SCTemplateRoutine,
+                  from source: IndexSet,
+                  to destination: Int) {
+        guard let steps = routine.steps?.array as? [SCTemplateRoutineStep] else { return }
+
+        var mutableSteps = steps
+        mutableSteps.move(fromOffsets: source, toOffset: destination)
+
+        routine.steps = NSOrderedSet(array: mutableSteps)
+
+        CoreDataManager.shared.saveContext()
+        refreshId = UUID()
     }
     
     // MARK: - Actions
@@ -30,7 +46,16 @@ class CustomiseRoutineViewModel: ObservableObject {
         NavigationManager.shared.pop()
     }
     
-    func btnSaveAction() {
+    func btnAddProductAction(routine: SCTemplateRoutine) {
+        if routine.name?.contains("Morning") == true {
+            
+        } else {
+            
+        }
         
+        let viewModel = AddProductViewModel()
+        viewModel.isForEdit = false
+        
+        NavigationManager.shared.push(to: .addProductView(destination: AddProductViewDestination(viewModel: viewModel)))
     }
 }

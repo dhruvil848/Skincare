@@ -71,15 +71,14 @@ extension CoreDataManager {
         return newDay
     }
     
-    
     private func syncDay(_ scDay: SCDay, with templateDay: SCTemplateDay) {
         // --- Sync routines ---
         let existingRoutines = (scDay.routines?.array as? [SCRoutine]) ?? []
         
         // Map for quick lookup
-        var existingRoutinesByName = [String: SCRoutine]()
+        var existingRoutinesByKey = [String: SCRoutine]()
         for routine in existingRoutines {
-            existingRoutinesByName[routine.name ?? ""] = routine
+            existingRoutinesByKey[routine.id?.uuidString ?? UUID().uuidString] = routine
         }
         
         // Track which routines should remain
@@ -88,7 +87,7 @@ extension CoreDataManager {
         for case let tmplRoutine as SCTemplateRoutine in templateDay.routines ?? [] {
             let routine: SCRoutine
             
-            if let existing = existingRoutinesByName[tmplRoutine.name ?? ""] {
+            if let existing = existingRoutinesByKey[tmplRoutine.id?.uuidString ?? UUID().uuidString] {
                 routine = existing
             } else {
                 routine = SCRoutine(context: context)
@@ -101,26 +100,31 @@ extension CoreDataManager {
             
             validRoutines.insert(routine)
             
-            // --- Sync steps ---
+            // --- Sync steps in template order ---
             let existingSteps = (routine.steps?.array as? [SCRoutineStep]) ?? []
             var existingStepsByKey = [String: SCRoutineStep]()
             
             for step in existingSteps {
-                let key = "\(step.productName ?? "")-\(step.displayOrder)"
-                existingStepsByKey[key] = step
+                if let id = step.id?.uuidString {
+                    existingStepsByKey[id] = step
+                }
             }
             
-            var validSteps = Set<SCRoutineStep>()
+            var orderedSteps = [SCRoutineStep]()
             
             for case let tmplStep as SCTemplateRoutineStep in tmplRoutine.steps ?? [] {
-                let key = "\(tmplStep.productName ?? "")-\(tmplStep.displayOrder)"
+                let key = tmplStep.id?.uuidString ?? UUID().uuidString
                 let step: SCRoutineStep
                 
                 if let existingStep = existingStepsByKey[key] {
                     step = existingStep
+                    // Update mutable fields without touching isCompleted
+                    step.productName = tmplStep.productName
+                    step.displayOrder = tmplStep.displayOrder
+                    step.frequency = tmplStep.frequency
                 } else {
                     step = SCRoutineStep(context: context)
-                    step.id = UUID()
+                    step.id = tmplStep.id // copy template id
                     step.productName = tmplStep.productName
                     step.displayOrder = tmplStep.displayOrder
                     step.frequency = tmplStep.frequency
@@ -128,12 +132,15 @@ extension CoreDataManager {
                     step.routine = routine
                 }
                 
-                validSteps.insert(step)
+                orderedSteps.append(step)
             }
+            
+            // Assign steps in template order
+            routine.steps = NSOrderedSet(array: orderedSteps)
             
             // Remove steps not in template
             for step in existingSteps {
-                if !validSteps.contains(step) {
+                if !orderedSteps.contains(step) {
                     context.delete(step)
                 }
             }
