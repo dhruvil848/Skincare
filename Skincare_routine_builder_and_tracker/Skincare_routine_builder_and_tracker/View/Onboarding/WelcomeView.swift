@@ -16,7 +16,7 @@ struct WelcomeView: View {
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
                 
-                Image(ImageName.onboarding_hello)
+                Image("onboarding_hello")
                     .resizable()
                     .scaledToFit()
                     .padding(.horizontal, 20)

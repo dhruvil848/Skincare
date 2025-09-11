@@ -8,8 +8,12 @@
 import Foundation
 
 enum NavigationDestination: Hashable {
+    // Onboarding
     case whatSkinTypeView
     case whatSkinConcernView
     case whatGoalView
     case yourRoutineReadyView
+    
+    // Main Tab
+    case customiseRoutineView
 }

@@ -7,14 +7,25 @@
 
 import SwiftUI
 
+let paddingHorizontal: CGFloat = 25
+let sectionBackgroundColor = Color.white
+let sectionBorderColor = Color.scBorderGray
+let sectionCornerRadius: CGFloat = 15
+
 struct HomeView: View {
     
     @ObservedObject var viewModel: HomeViewModel
     
-    let paddingHorizontal: CGFloat = 25
-    let sectionBackgroundColor = Color.white
-    let sectionBorderColor = Color.scBorderGray
-    let sectionCornerRadius: CGFloat = 15
+    init(viewModel: HomeViewModel) {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white // default color
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         ZStack {
@@ -22,11 +33,12 @@ struct HomeView: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 homeSection
+                    .padding(.bottom, 20)
             }
             .frame(maxWidth: .infinity)
         }
         .onAppear {
-            viewModel.intialize()
+            viewModel.initialize()
         }
     }
     
@@ -46,7 +58,7 @@ struct HomeView: View {
     @ViewBuilder
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SCText(title: "Hi, \(viewModel.greetingMessage())", color: .scBlack, font: .system(size: 20, weight: .bold, design: .rounded), alignment: .leading)
+            SCText(title: "Hi, \(Utility.greetingMessage())", color: .scBlack, font: .system(size: 20, weight: .bold, design: .rounded), alignment: .leading)
                 .padding(.bottom, 15)
             
             SCText(title: "Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .init(hex: "3D3D3D"), font: .system(size: 16, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.2)
@@ -75,7 +87,7 @@ struct HomeView: View {
                         .animation(.easeInOut, value: viewModel.scTemplateDay?.streak)
                 }
                 
-                SCText(title: viewModel.streakMessage(), color: .init(hex: "707070"), font: .system(size: 14, weight: .regular, design: .default), alignment: .leading)
+                SCText(title: Utility.streakMessage(streak: viewModel.scTemplateDay?.streak), color: .init(hex: "707070"), font: .system(size: 14, weight: .regular, design: .default), alignment: .leading)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 17)
@@ -114,7 +126,7 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 15) {
                 SCText(title: "🌸️  Daily Tip", color: .scBlack, font: .system(size: 18, weight: .medium, design: .rounded), alignment: .leading, kerning: 0)
                 
-                SCText(title: tipOfTheDay, color: .init(hex: "333333"), font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading, kerning: 0)
+                SCText(title: Utility.getDailyTip(), color: .init(hex: "333333"), font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading, kerning: 0)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 17)
@@ -143,7 +155,7 @@ extension HomeView {
                 /// Title section
                 HStack(alignment: .center, spacing: 0) {
                     Button {
-                        
+                        viewModel.btnCustomiseRoutineAction()
                     } label: {
                         HStack(alignment: .center, spacing: 10) {
                             SCText(title: routine.name ?? "-", color: .scBlack, font: .system(size: 18, weight: .semibold, design: .rounded), alignment: .leading)
@@ -205,13 +217,13 @@ extension HomeView {
             Button {
                 onSelect()
             } label: {
-                HStack(alignment: .center, spacing: 15) {
+                HStack(alignment: .center, spacing: 12) {
                     Image(imageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 18, height: 18)
                     
-                    SCText(title: step.productName ?? "-", color: textColor, font: .system(size: 16.5, weight: .medium, design: .rounded), alignment: .leading, italic: step.isCompleted)
+                    SCText(title: step.productName ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
                 }
                 .background(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)

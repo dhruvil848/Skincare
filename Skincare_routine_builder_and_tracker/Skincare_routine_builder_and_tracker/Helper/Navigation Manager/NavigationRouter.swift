@@ -12,6 +12,8 @@ enum NavigationRouter {
     @ViewBuilder
     static func destinationView(destination: NavigationDestination) -> some View {
         switch destination {
+            
+        // Onboarding
         case .whatSkinTypeView:
             WhatSkinTypeView()
             
@@ -23,6 +25,10 @@ enum NavigationRouter {
             
         case .yourRoutineReadyView:
             YourRoutineReadyView()
+            
+        // Main tab
+        case .customiseRoutineView:
+            CustomiseRoutineView()
         }
     }
 }

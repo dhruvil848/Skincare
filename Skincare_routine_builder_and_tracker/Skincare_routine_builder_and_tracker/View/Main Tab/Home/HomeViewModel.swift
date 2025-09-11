@@ -13,13 +13,19 @@ class HomeViewModel: ObservableObject {
     @Published var scTemplateDay: SCTemplateDay?
     @Published var scDay: SCDay?
     
-    
     // MARK: - Methods
     func onAppear() {
-        intialize()
+        initialize()
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white // default color
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     
-    func intialize() {
+    func initialize() {
         fetchTodayRoutine()
     }
     
@@ -32,54 +38,12 @@ class HomeViewModel: ObservableObject {
 
     }
     
+    // MARK: - Actions
     func btnSelectRoutine(routine: SCRoutine, step: SCRoutineStep) {
         scDay = CoreDataManager.shared.selectRoutine(day: scDay, routine: routine, step: step)
     }
     
-    func streakMessage() -> String {
-        guard let completedDays = scTemplateDay?.streak else { return "" }
-
-        switch completedDays {
-        case 0:
-            return "Let's start your first routine! 🌱"
-        case 1:
-            return "Great! You've taken the first step. 👏"
-        case 2:
-            return "Good going! Keep the momentum. 🔥"
-        case 3:
-            return "Halfway through the week! Keep it up! 💪"
-        case 4:
-            return "Awesome! You're on a roll! ✨"
-        case 5:
-            return "Impressive! Almost there! 🌟"
-        case 6:
-            return "Just one more day to complete the week! 🏁"
-        case 7:
-            return "Amazing! You completed the week! Take a moment to celebrate! 🎉"
-        case 8...10:
-            return "Unstoppable! You're building a strong habit! 💯"
-        case 11...14:
-            return "Legendary streak! Your skin routine is solid! 🏆"
-        case 15...20:
-            return "Epic! Your consistency is inspiring! 🌟"
-        default:
-            return "Keep your streak alive! Consistency is key! 💖"
-        }
+    func btnCustomiseRoutineAction() {
+        NavigationManager.shared.push(to: .customiseRoutineView)
     }
-    
-    func greetingMessage() -> String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        
-        switch 24 {
-        case 5..<12:
-            return "Good Morning! 👋🏻"
-        case 12..<17:
-            return "Good Afternoon! 👋🏻"
-        case 17..<21:
-            return "Good Evening! 👋🏻"
-        default:
-            return "Good Night! 👋🏻"
-        }
-    }
-
 }
