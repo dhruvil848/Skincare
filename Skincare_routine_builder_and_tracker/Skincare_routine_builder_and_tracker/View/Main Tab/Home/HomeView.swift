@@ -83,7 +83,7 @@ struct HomeView: View {
                     
                     let totalDays = 7  // always a week
                     let progress = Float(CoreDataManager.shared.getCompletedDaysThisWeek()) / Float(totalDays)
-                    SCStreakProgressBarView(progress: progress)
+                    SCStreakProgressBarView(color: textColor, progress: progress)
                         .animation(.easeInOut, value: viewModel.scTemplateDay?.streak)
                 }
                 

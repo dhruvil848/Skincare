@@ -24,8 +24,10 @@ struct AddProductView: View {
                 }
                 
                 footerSection
+                    .ignoresSafeArea(.keyboard)
             }
         }
+        .ignoresSafeArea(.keyboard)
         .navigationBarBackButtonHidden()
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
@@ -38,6 +40,14 @@ struct AddProductView: View {
                     viewModel.btnBackAction()
                 }
             }
+        }
+        .alert(viewModel.alertTitle, isPresented: $viewModel.showAlert) {
+            Button("OK") {
+                viewModel.showAlert = false
+            }
+
+        } message: {
+            Text(viewModel.alertMessage)
         }
     }
     
@@ -58,6 +68,7 @@ struct AddProductView: View {
             
             HStack(alignment: .center, spacing: 0) {
                 TextField("", text: $viewModel.productName)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
                     .tint(Color.scPurple)
                     .padding(.horizontal, 10)
             }
@@ -74,8 +85,8 @@ struct AddProductView: View {
     
     private func sectionTitle(title: String) -> some View {
         HStack(alignment: .center, spacing: 0) {
-            SCText(title: title, color: Color.scBlack, font: .system(size: 16, weight: .regular, design: .rounded), alignment: .leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            SCText(title: title, color: .scBlack, font: .system(size: 17, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.01)
+                .frame(alignment: .leading)
         }
     }
     
@@ -90,12 +101,21 @@ struct AddProductView: View {
     }
     
     private var timeOfDaySection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 0) {
             sectionTitle(title: "Time of day")
+                .padding(.bottom, viewModel.disableTimeOfDay ? 0 : 10)
+            
+            if viewModel.disableTimeOfDay {
+                SCText(title: "Time of day cannot be changed because this is the only product in the routine.", color: .gray, font: .system(size: 14, weight: .regular, design: .rounded), alignment: .leading, lineSpacing: 0)
+                    .padding(.top, 5)
+                    .padding(.bottom, 15)
+            }
             
             optionsList(arrOptions: viewModel.arrTime, selectedOption: viewModel.timeOfDay) { productType in
                 viewModel.timeOfDay = productType
             }
+            .disabled(viewModel.disableTimeOfDay)
+            .opacity(viewModel.disableTimeOfDay ? 0.5 : 1)
         }
     }
     
@@ -137,16 +157,16 @@ extension AddProductView {
     private func optionChip(title: String, selected: Bool, onSelect: @escaping (() -> Void)) -> some View {
         Button(action: onSelect) {
             Text(title)
-                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .font(.system(size: 14, weight: selected ? .medium : .medium, design: .rounded))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
                 .background(
-                    selected ? Color.scPurple : Color.white
+                    selected ? Color.scPurple.opacity(0.05) : Color.white
                 )
-                .foregroundColor(selected ? .white : .init(hex: "757575"))
+                .foregroundColor(selected ? Color.scPurple : .init(hex: "757575"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(selected ? Color.white : Color.init(hex: "D2D2D2"), lineWidth: 1)
+                        .stroke(selected ? Color.scPurple : Color.init(hex: "D2D2D2"), lineWidth: 1)
                 )
                 .kerning(-0.1)
                 .cornerRadius(20)

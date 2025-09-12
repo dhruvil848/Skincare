@@ -76,6 +76,14 @@ struct CustomiseRoutineView: View {
         .onAppear {
             viewModel.onAppear()
         }
+        .alert(viewModel.alertTitle, isPresented: $viewModel.showAlert) {
+            Button("OK") {
+                viewModel.showAlert = false
+            }
+
+        } message: {
+            Text(viewModel.alertMessage)
+        }
     }
     
     
@@ -128,25 +136,23 @@ extension CustomiseRoutineView {
                 let step = routineSteps[index]
                 let isLast = index+1 == routineSteps.count
                 
-                routineStepRow(step: step, isLast: isLast) {
-                    
+                routineStepRow(routine: routine, step: step, isLast: isLast) {
+                    viewModel.openAddProductView(isForEdit: true, routine: routine, routineStep: step)
                 }
             }
             .onMove { indexSet, index in
                 viewModel.moveStep(in: routine, from: indexSet, to: index)
             }
-            .onDelete { _ in
-                
+            .onDelete { indexSet in
+                viewModel.deleteStep(from: routine, indexSet: indexSet)
             }
             .backgroundStyle(Color.white)
         }
         .background(Color.clear)
-        
     }
     
     @ViewBuilder
-    private func routineStepRow(step: SCTemplateRoutineStep, isLast: Bool, onSelect: @escaping (() -> Void)) -> some View {
-        let textColor: Color = step.isCompleted ? Color.gray : Color.scBlack
+    private func routineStepRow(routine: SCTemplateRoutine, step: SCTemplateRoutineStep, isLast: Bool, onSelect: @escaping (() -> Void)) -> some View {
         
         VStack(alignment: .leading, spacing: 0) {
             Button {
@@ -160,7 +166,7 @@ extension CustomiseRoutineView {
                         .frame(width: 18, height: 18)
                         .offset(y: -2)
                     
-                    SCText(title: step.product?.name ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
+                    SCText(title: step.product?.name ?? "-", color: Color.scBlack, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: false)
                     
                     Spacer(minLength: 0)
                     
@@ -168,9 +174,6 @@ extension CustomiseRoutineView {
                         .foregroundStyle(Color.gray)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .onTapGesture {
-                    viewModel.openAddProductView(isForEdit: true, routineStep: step)
-                }
             }
             .padding(.vertical, 15)
         }

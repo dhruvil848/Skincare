@@ -13,6 +13,13 @@ class CustomiseRoutineViewModel: ObservableObject {
     @Published var scDay: SCTemplateDay?    // Editable copy for UI
     @Published var refreshId: UUID = UUID()
     
+    @Published var draggedStep: (step: SCTemplateRoutineStep, index: Int)?
+
+    @Published var showAlert: Bool = false
+    @Published var alertTitle: String = ""
+    @Published var alertMessage: String = ""
+
+    
     // MARK: - Methods
     func onAppear() {
         initialize()
@@ -27,6 +34,34 @@ class CustomiseRoutineViewModel: ObservableObject {
         refreshId = UUID()
     }
     
+    func deleteStep(from routine: SCTemplateRoutine, indexSet: IndexSet) {
+        guard var steps = routine.steps?.array as? [SCTemplateRoutineStep] else { return }
+        guard steps.count != 1 else {
+            refreshId = UUID()
+            self.showAlert(title: "Action Not Allowed", message: "Routine must have at least one step. You cannot delete this step.")
+            return
+        }
+        
+        // Remove steps at given indices
+        for index in indexSet.sorted(by: >) { // Remove from highest to lowest
+            steps.remove(at: index)
+        }
+
+        // Reassign displayOrder
+        for (i, step) in steps.enumerated() {
+            step.displayOrder = Int16(i)
+        }
+
+        // Update Core Data relationship
+        routine.steps = NSOrderedSet(array: steps)
+
+        // Save context
+        CoreDataManager.shared.saveContext()
+
+        // Refresh UI if needed
+        refreshId = UUID()
+    }
+
     func moveStep(in routine: SCTemplateRoutine,
                   from source: IndexSet,
                   to destination: Int) {
@@ -47,13 +82,19 @@ class CustomiseRoutineViewModel: ObservableObject {
     }
     
     func btnAddProductAction(routine: SCTemplateRoutine) {
-        openAddProductView(isForEdit: false, routineStep: nil)
+        openAddProductView(isForEdit: false, routine: routine, routineStep: nil)
     }
     
-    func openAddProductView(isForEdit: Bool, routineStep: SCTemplateRoutineStep?) {
-        let viewModel = AddProductViewModel(routineStep: routineStep)
+    func openAddProductView(isForEdit: Bool, routine: SCTemplateRoutine, routineStep: SCTemplateRoutineStep?) {
+        let viewModel = AddProductViewModel(routine: routine, routineStep: routineStep)
         viewModel.isForEdit = isForEdit
         
         NavigationManager.shared.push(to: .addProductView(destination: AddProductViewDestination(viewModel: viewModel)))
+    }
+    
+    func showAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
     }
 }

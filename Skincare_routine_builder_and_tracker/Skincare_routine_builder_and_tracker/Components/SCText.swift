@@ -16,6 +16,7 @@ struct SCText: View {
     var alignment: TextAlignment = .center
     var kerning: CGFloat = 0
     var italic: Bool = false
+    var lineSpacing: CGFloat? = nil
     
     var body: some View {
         Text(title)
@@ -25,8 +26,9 @@ struct SCText: View {
             .multilineTextAlignment(alignment)
             .lineLimit(lineLimit)
             .kerning(kerning)
-            
-            
+            .if(lineSpacing != nil) { text in
+                text.lineSpacing(lineSpacing!)
+            }
     }
 }
 

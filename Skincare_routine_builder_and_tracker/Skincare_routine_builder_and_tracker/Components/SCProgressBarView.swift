@@ -28,12 +28,13 @@ struct SCProgressBarView: View {
 }
 
 struct SCStreakProgressBarView: View {
+    let color: Color
     let progress: Float
     
     var body: some View {
         VStack(alignment: .trailing, spacing: 6) {
             ProgressView(value: progress)
-                .tint(.scPurple)
+                .tint(color)
                 .frame(maxWidth: .infinity)
         }
     }
