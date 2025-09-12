@@ -119,15 +119,18 @@ extension CoreDataManager {
                 if let existingStep = existingStepsByKey[key] {
                     step = existingStep
                     // Update mutable fields without touching isCompleted
-                    step.productName = tmplStep.productName
+                    if tmplStep.product != nil {
+                        step.product = cloneProduct(from: tmplStep.product!)
+                    }
                     step.displayOrder = tmplStep.displayOrder
-                    step.frequency = tmplStep.frequency
                 } else {
                     step = SCRoutineStep(context: context)
                     step.id = tmplStep.id // copy template id
-                    step.productName = tmplStep.productName
+                    
+                    if tmplStep.product != nil {
+                        step.product = cloneProduct(from: tmplStep.product!)
+                    }
                     step.displayOrder = tmplStep.displayOrder
-                    step.frequency = tmplStep.frequency
                     step.isCompleted = false
                     step.routine = routine
                 }
@@ -152,5 +155,15 @@ extension CoreDataManager {
                 context.delete(routine)
             }
         }
+    }
+    
+    private func cloneProduct(from templateProduct: SCTemplateProduct) -> SCProduct {
+        let product = SCProduct(context: context)
+        product.id = UUID()
+        product.name = templateProduct.name
+        product.type = templateProduct.type
+        product.frequency = templateProduct.frequency
+        product.timeOfDay = templateProduct.timeOfDay
+        return product
     }
 }

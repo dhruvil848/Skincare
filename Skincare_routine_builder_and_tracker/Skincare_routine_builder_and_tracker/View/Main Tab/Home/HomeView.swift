@@ -223,7 +223,7 @@ extension HomeView {
                         .scaledToFit()
                         .frame(width: 18, height: 18)
                     
-                    SCText(title: step.productName ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
+                    SCText(title: step.product?.name ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
                 }
                 .background(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -43,7 +43,7 @@ struct WhatSkinConcernView: View {
                 SCText(title: "What are your skin concerns?", color: .scBlack, font: .system(size: 26, weight: .semibold), alignment: .leading)
                     .padding(.top, 50)
                     .padding(.bottom, 5)
-                
+
                 SCText(title: "Select one or more areas you’d like to improve.", color: .scBlack, font: .system(size: 14, weight: .regular), alignment: .leading)
             }
             .padding(.bottom, 50)

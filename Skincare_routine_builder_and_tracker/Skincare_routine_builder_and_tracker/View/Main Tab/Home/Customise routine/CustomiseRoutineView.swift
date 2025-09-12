@@ -160,7 +160,7 @@ extension CustomiseRoutineView {
                         .frame(width: 18, height: 18)
                         .offset(y: -2)
                     
-                    SCText(title: step.productName ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
+                    SCText(title: step.product?.name ?? "-", color: textColor, font: .system(size: 16.5, weight: .regular, design: .rounded), alignment: .leading, italic: step.isCompleted)
                     
                     Spacer(minLength: 0)
                     
@@ -168,6 +168,9 @@ extension CustomiseRoutineView {
                         .foregroundStyle(Color.gray)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .onTapGesture {
+                    viewModel.openAddProductView(isForEdit: true, routineStep: step)
+                }
             }
             .padding(.vertical, 15)
         }

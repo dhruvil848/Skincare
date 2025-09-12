@@ -93,20 +93,34 @@ extension CoreDataManager {
         morning.id = UUID()
         morning.name = "☀️ Morning"
         morning.day = baseDay
+        
+        let cleanserProduct =  SCTemplateProduct(context: context)
+        cleanserProduct.id = UUID()
+        cleanserProduct.name = "Cetaphil oily cleanser"
+        cleanserProduct.type = "Cleanser"
+        cleanserProduct.frequency = "Everyday"
+        cleanserProduct.timeOfDay = "Morning"
+        
+        let moisturizerProduct =  SCTemplateProduct(context: context)
+        cleanserProduct.id = UUID()
+        moisturizerProduct.name = "Deconstruct oily free moisturizer"
+        moisturizerProduct.type = "Moisturizer"
+        moisturizerProduct.frequency = "Everyday"
+        moisturizerProduct.timeOfDay = "Morning"
 
-        let cleanser = SCTemplateRoutineStep(context: context)
-        cleanser.id = UUID()
-        cleanser.displayOrder = 0
-        cleanser.productName = "Cleanser"
-        cleanser.frequency = "Everyday"
-        morning.addToSteps(cleanser)
+        let cleanserSteps = SCTemplateRoutineStep(context: context)
+        cleanserSteps.id = UUID()
+        cleanserSteps.displayOrder = 0
+        cleanserSteps.product = cleanserProduct
+        cleanserProduct.step = cleanserSteps
+        morning.addToSteps(cleanserSteps)
 
-        let moisturizer = SCTemplateRoutineStep(context: context)
-        moisturizer.id = UUID()
-        moisturizer.displayOrder = 1
-        moisturizer.productName = "Moisturizer"
-        moisturizer.frequency = "Everyday"
-        morning.addToSteps(moisturizer)
+        let moisturizerStep = SCTemplateRoutineStep(context: context)
+        moisturizerStep.id = UUID()
+        moisturizerStep.displayOrder = 1
+        moisturizerStep.product = moisturizerProduct
+        moisturizerProduct.step = moisturizerStep
+        morning.addToSteps(moisturizerStep)
         
         return morning
     }
@@ -117,20 +131,34 @@ extension CoreDataManager {
         evening.id = UUID()
         evening.name = "🌙 Evening"
         evening.day = baseDay
+        
+        let cleanserProduct =  SCTemplateProduct(context: context)
+        cleanserProduct.id = UUID()
+        cleanserProduct.name = "Minimalist salicyclic acid cleanser"
+        cleanserProduct.type = "Cleanser"
+        cleanserProduct.frequency = "Everyday"
+        cleanserProduct.timeOfDay = "Evening"
+        
+        let moisturizerProduct =  SCTemplateProduct(context: context)
+        cleanserProduct.id = UUID()
+        moisturizerProduct.name = "Nutrogena hydro booster gel moisturizer"
+        moisturizerProduct.type = "Moisturizer"
+        moisturizerProduct.frequency = "Everyday"
+        moisturizerProduct.timeOfDay = "Evening"
 
-        let nightCleanser = SCTemplateRoutineStep(context: context)
-        nightCleanser.id = UUID()
-        nightCleanser.displayOrder = 0
-        nightCleanser.productName = "Cleanser"
-        nightCleanser.frequency = "Everyday"
-        evening.addToSteps(nightCleanser)
+        let nightCleanserStep = SCTemplateRoutineStep(context: context)
+        nightCleanserStep.id = UUID()
+        nightCleanserStep.displayOrder = 0
+        nightCleanserStep.product = cleanserProduct
+        cleanserProduct.step = nightCleanserStep
+        evening.addToSteps(nightCleanserStep)
 
-        let treatment = SCTemplateRoutineStep(context: context)
-        treatment.id = UUID()
-        treatment.displayOrder = 1
-        treatment.productName = "Treatment"
-        treatment.frequency = "Alternate"
-        evening.addToSteps(treatment)
+        let treatmentStep = SCTemplateRoutineStep(context: context)
+        treatmentStep.id = UUID()
+        treatmentStep.displayOrder = 1
+        treatmentStep.product = moisturizerProduct
+        moisturizerProduct.step = treatmentStep
+        evening.addToSteps(treatmentStep)
         
         return evening
     }

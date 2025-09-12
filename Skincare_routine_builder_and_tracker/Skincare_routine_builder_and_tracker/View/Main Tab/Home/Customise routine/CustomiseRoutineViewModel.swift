@@ -47,14 +47,12 @@ class CustomiseRoutineViewModel: ObservableObject {
     }
     
     func btnAddProductAction(routine: SCTemplateRoutine) {
-        if routine.name?.contains("Morning") == true {
-            
-        } else {
-            
-        }
-        
-        let viewModel = AddProductViewModel()
-        viewModel.isForEdit = false
+        openAddProductView(isForEdit: false, routineStep: nil)
+    }
+    
+    func openAddProductView(isForEdit: Bool, routineStep: SCTemplateRoutineStep?) {
+        let viewModel = AddProductViewModel(routineStep: routineStep)
+        viewModel.isForEdit = isForEdit
         
         NavigationManager.shared.push(to: .addProductView(destination: AddProductViewDestination(viewModel: viewModel)))
     }
