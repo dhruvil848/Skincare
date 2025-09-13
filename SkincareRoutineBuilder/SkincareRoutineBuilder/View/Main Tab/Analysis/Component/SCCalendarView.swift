@@ -50,10 +50,8 @@ struct SCCalendarView: View {
                 // Calendar days
                 ForEach(days, id: \.self) { date in
                     if let date = date {
-                        let isInRange = isDateInRange(date)
-                        let borderColor = isInRange ? viewModel.statusColor(for: date) : Color.gray.opacity(0.3)
-                        let textColor = isInRange ? borderColor : Color.gray.opacity(0.4)
-                        let isToday = Calendar.current.isDateInToday(date)
+                        let borderColor = getDayColor(for: date)
+                        let textColor = borderColor
 
                         VStack(spacing: 4) {
                             Text("\(Calendar.current.component(.day, from: date))")
@@ -64,10 +62,10 @@ struct SCCalendarView: View {
                         .padding(5)
                         .background(
                             Circle()
-                                .stroke(borderColor, lineWidth: isToday ? 1.5 : 1)
+                                .stroke(.clear, lineWidth: 0.5)
                                 .background(
                                     Circle()
-                                        .fill(isToday ? Color.purple.opacity(0.15) : Color.clear)
+                                        .fill(borderColor.opacity(0.2))
                                 )
                         )
                     } else {
@@ -149,9 +147,27 @@ struct SCCalendarView: View {
         return days
     }
     
-    private func isDateInRange(_ date: Date) -> Bool {
-        let calendar = Calendar.current
-        let d = calendar.startOfDay(for: date)
-        return d >= calendar.startOfDay(for: startDate) && d <= calendar.startOfDay(for: today)
+    func getDayColor(for date: Date) -> Color {
+        if Calendar.current.isDateInToday(date) {
+            return Color.scPurple
+        }
+        
+        guard let day = CoreDataManager.shared.fetchDay(for: date) else {
+            return Color.gray
+        }
+        
+        guard let routines = day.routines?.array as? [SCRoutine], !routines.isEmpty else {
+            return Color.gray
+        }
+        
+        let completedCount = routines.filter { $0.isCompleted }.count
+        
+        if completedCount == routines.count {
+            return Color.green
+        } else if completedCount > 0 {
+            return Color.orange
+        } else {
+            return Color.gray
+        }
     }
 }
