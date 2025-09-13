@@ -23,9 +23,17 @@ class AnalysisViewModel: ObservableObject {
     @Published var selectedDateInCalendar = Date()
     
     let startDate = UserDefaultManager.shared.startDate
+    var endDate: Date {
+        return Date()
+    }
+    
+    var isSelectedDateToday: Bool {
+        return Calendar.current.isDateInToday(selectedDateInCalendar)
+    }
+    
     let currentDayColor: Color = Color.scPurple
-    let bothRoutineCompletedColor: Color = Color.green
-    let oneRoutineCompletedColor: Color = Color.orange
+    let bothRoutineCompletedColor: Color = Color.init(hex: "00AA00")
+    let oneRoutineCompletedColor: Color = Color.init(hex: "FF7300")
     let noRoutineCompletedColor: Color = Color.gray
     let otherDayColor: Color = Color.secondary
     
@@ -44,6 +52,10 @@ class AnalysisViewModel: ObservableObject {
     }
         
     func loadSelectedDay(from date: Date) {
+        guard isDateInRange(date) else {
+            return
+        }
+        
         selectedDateInCalendar = date
         let days = CoreDataManager.shared.fetchDays(from: startDate, to: Date())
         
@@ -54,7 +66,18 @@ class AnalysisViewModel: ObservableObject {
         }
     }
     
-    func isDateInRange(_ date: Date, startDate: Date, endDate: Date) -> Bool {
+    // MARK: - Action
+    func btnSelectRoutine(routine: SCRoutine, step: SCRoutineStep) {
+        selectedDay = CoreDataManager.shared.selectRoutine(day: selectedDay, routine: routine, step: step).day
+    }
+    
+    func selectTab(at index: Int) {
+        selectedTab = index
+    }
+}
+
+extension AnalysisViewModel {
+    func isDateInRange(_ date: Date) -> Bool {
         let calendar = Calendar.current
         let d = calendar.startOfDay(for: date)
         let start = calendar.startOfDay(for: startDate)
@@ -63,8 +86,8 @@ class AnalysisViewModel: ObservableObject {
     }
     
     func getDayColor(for date: Date) -> Color {
-        if Calendar.current.isDateInToday(date) {
-            return currentDayColor
+        if !isDateInRange(date) {
+            return .gray.opacity(0.4)
         }
         
         let day = CoreDataManager.shared.fetchDay(for: date)
@@ -83,4 +106,5 @@ class AnalysisViewModel: ObservableObject {
             return noRoutineCompletedColor
         }
     }
+    
 }

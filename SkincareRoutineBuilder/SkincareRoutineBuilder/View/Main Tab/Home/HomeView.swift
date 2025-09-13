@@ -63,12 +63,15 @@ struct HomeView: View {
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             SCText(title: "Hi, \(Utility.greetingMessage())", color: .scBlack, font: .system(size: 20, weight: .bold, design: .rounded), alignment: .leading)
-                .padding(.bottom, 15)
+                .padding(.bottom, 10)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             SCText(title: "Your concern: \(UserDefaultManager.shared.skinConcerns.compactMap({ $0.title }).joined(separator: ", "))", color: .init(hex: "3D3D3D"), font: .system(size: 16, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.2)
                 .padding(.bottom, 5)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             SCText(title: "Let’s care of your skin today!! 🚀 ", color: .init(hex: "3D3D3D"), font: .system(size: 16, weight: .medium, design: .rounded), alignment: .leading, kerning: -0.2)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal, paddingHorizontal)
         .padding(.top, 15)

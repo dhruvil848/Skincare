@@ -10,7 +10,6 @@ import SwiftUI
 struct SCCalendarView: View {
     @ObservedObject var viewModel: AnalysisViewModel
     @State private var currentMonth: Date = Date()
-    let today: Date = Date()
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -50,7 +49,8 @@ struct SCCalendarView: View {
                     if let date = date {
                         let textColor = viewModel.getDayColor(for: date)
                         let backgroundColor = textColor.opacity(0.1)
-                        let borderColor = Calendar.current.isDate(date, inSameDayAs: viewModel.selectedDateInCalendar) ? textColor : .clear
+                        let isSelected = Calendar.current.isDate(date, inSameDayAs: viewModel.selectedDateInCalendar)
+                        let borderColor = isSelected ? textColor : textColor.opacity(0.2)
 
                         VStack(spacing: 4) {
                             Text("\(Calendar.current.component(.day, from: date))")
@@ -61,7 +61,7 @@ struct SCCalendarView: View {
                         .padding(5)
                         .background(
                             Circle()
-                                .stroke(borderColor, lineWidth: 1)
+                                .stroke(borderColor, lineWidth: isSelected ? 1 : 0.5)
                                 .background(
                                     Circle()
                                         .fill(backgroundColor)
@@ -97,7 +97,7 @@ struct SCCalendarView: View {
 
     private var canGoNextMonth: Bool {
         let calendar = Calendar.current
-        let startOfTodayMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: today))!
+        let startOfTodayMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: viewModel.endDate))!
         return normalizedCurrentMonth < startOfTodayMonth
     }
 
