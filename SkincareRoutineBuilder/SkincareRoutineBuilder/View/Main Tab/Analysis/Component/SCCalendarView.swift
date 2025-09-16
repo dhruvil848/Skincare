@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct SCCalendarView: View {
+    @ObservedObject var viewModel: AnalysisViewModel
     @State private var currentMonth: Date = Date()
+    
     var startDate = UserDefaultManager.shared.startDate
     let today: Date = Date()
-    
+
     var body: some View {
         VStack {
-            // Header with arrows
             HStack {
                 Button(action: { previousMonth() }) {
                     Image(systemName: "chevron.left")
@@ -33,7 +34,7 @@ struct SCCalendarView: View {
                 }
                 .disabled(!canGoNextMonth)
             }
-            .padding(.horizontal)
+            .padding(20)
             
             // Calendar Grid
             let days = generateDays(for: currentMonth)
@@ -42,49 +43,80 @@ struct SCCalendarView: View {
                 // Weekday headers
                 ForEach(weekdays(), id: \.self) { day in
                     Text(day)
-                        .font(.caption)
+                        .font(.system(size: 14, weight: .light, design: .default))
                         .frame(maxWidth: .infinity)
                 }
                 
                 // Calendar days
                 ForEach(days, id: \.self) { date in
                     if let date = date {
-                        let isWithinRange = isDateInRange(date)
-                        Text("\(Calendar.current.component(.day, from: date))")
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                            .background(isWithinRange ? Color.blue.opacity(0.2) : Color.gray.opacity(0.2))
-                            .clipShape(Circle())
-                            .foregroundColor(isWithinRange ? .primary : .secondary)
+                        let isInRange = isDateInRange(date)
+                        let borderColor = isInRange ? viewModel.statusColor(for: date) : Color.gray.opacity(0.3)
+                        let textColor = isInRange ? borderColor : Color.gray.opacity(0.4)
+                        let isToday = Calendar.current.isDateInToday(date)
+
+                        VStack(spacing: 4) {
+                            Text("\(Calendar.current.component(.day, from: date))")
+                                .font(.system(size: 13, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, minHeight: 24)
+                                .foregroundColor(textColor)
+                        }
+                        .padding(5)
+                        .background(
+                            Circle()
+                                .stroke(borderColor, lineWidth: isToday ? 1.5 : 1)
+                                .background(
+                                    Circle()
+                                        .fill(isToday ? Color.purple.opacity(0.15) : Color.clear)
+                                )
+                        )
                     } else {
-                        Text("") // Empty cell for alignment
+                        Text("")
                             .frame(maxWidth: .infinity, minHeight: 40)
                     }
                 }
+
             }
-            .padding()
+            .padding(20)
         }
     }
     
     // MARK: - Navigation
     
-    private func previousMonth() {
-        currentMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentMonth) ?? currentMonth
+    private var normalizedCurrentMonth: Date {
+        let calendar = Calendar.current
+        return calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
     }
-    
-    private func nextMonth() {
-        currentMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentMonth) ?? currentMonth
-    }
-    
+
     private var canGoPreviousMonth: Bool {
-        let startOfStartDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: startDate))!
-        return currentMonth > startOfStartDate
+        let calendar = Calendar.current
+        let startOfStartMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: startDate))!
+        return normalizedCurrentMonth > startOfStartMonth
     }
-    
+
     private var canGoNextMonth: Bool {
-        let startOfToday = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: today))!
-        return currentMonth < startOfToday
+        let calendar = Calendar.current
+        let startOfTodayMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: today))!
+        return normalizedCurrentMonth < startOfTodayMonth
     }
-    
+
+    // Navigation updates also normalize
+    private func previousMonth() {
+        if canGoPreviousMonth {
+            if let newMonth = Calendar.current.date(byAdding: .month, value: -1, to: normalizedCurrentMonth) {
+                currentMonth = newMonth
+            }
+        }
+    }
+
+    private func nextMonth() {
+        if canGoNextMonth {
+            if let newMonth = Calendar.current.date(byAdding: .month, value: 1, to: normalizedCurrentMonth) {
+                currentMonth = newMonth
+            }
+        }
+    }
+
     // MARK: - Helpers
     
     private func monthYearString(_ date: Date) -> String {
@@ -95,10 +127,9 @@ struct SCCalendarView: View {
     
     private func weekdays() -> [String] {
         let formatter = DateFormatter()
-        formatter.shortWeekdaySymbols = ["S", "M", "T", "W", "T", "F", "S"]
         return formatter.shortWeekdaySymbols
     }
-    
+
     private func generateDays(for month: Date) -> [Date?] {
         let calendar = Calendar.current
         

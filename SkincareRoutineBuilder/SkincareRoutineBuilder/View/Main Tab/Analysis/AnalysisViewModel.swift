@@ -47,21 +47,21 @@ class AnalysisViewModel: ObservableObject {
 extension AnalysisViewModel {
     func statusColor(for date: Date) -> Color {
         guard let day = CoreDataManager.shared.fetchDay(for: date) else {
-            return .gray.opacity(0.3) // no record
+            return Color.gray.opacity(0.3)
         }
         
         guard let routines = day.routines?.array as? [SCRoutine], !routines.isEmpty else {
-            return .gray.opacity(0.3)
+            return Color.gray.opacity(0.3)
         }
         
         let completedCount = routines.filter { $0.isCompleted }.count
         
         if completedCount == routines.count {
-            return .green // all routines done
+            return Color.scPurple
         } else if completedCount > 0 {
-            return .yellow // some routines done
+            return Color.orange
         } else {
-            return .gray.opacity(0.3) // none done
+            return Color.gray
         }
     }
 }

@@ -11,7 +11,7 @@ struct AnalysisView: View {
     @StateObject var viewModel = AnalysisViewModel()
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             SCGredientBG()
             
             VStack(alignment: .leading, spacing: 0) {
@@ -44,14 +44,34 @@ struct AnalysisView: View {
     
     private var tabSection: some View {
         VStack(alignment: .leading, spacing: 8) {
+            
+            
             TabView(selection: $viewModel.selectedTab) {
-                SCCalendarView()
+                calendarSection
             }
             .tabViewStyle(PageTabViewStyle())
         }
-        .padding(.horizontal, 20)
+        .frame(alignment: .top)
         .padding(.top, 20)
         .padding(.bottom, 30)
+    }
+    
+    private var calendarSection: some View {
+        VStack(alignment: .center, spacing: 0) {
+            ScrollView(.vertical) {
+                SCCalendarView(viewModel: viewModel)
+                    .background(sectionBackgroundColor)
+                    .cornerRadius(sectionCornerRadius)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: sectionCornerRadius)
+                            .stroke(sectionBorderColor, lineWidth: 1)
+                    )
+                    .padding(.horizontal, paddingHorizontal)
+                    .frame(maxWidth: .infinity)
+            }
+            .scrollIndicators(.hidden)
+            
+        }
     }
 }
 
