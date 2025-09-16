@@ -33,7 +33,6 @@ struct HomeView: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 homeSection
-                    .padding(.bottom, 20)
             }
             .frame(maxWidth: .infinity)
         }
@@ -53,6 +52,7 @@ struct HomeView: View {
                 streakSection
                 todayRoutineSection
                 dailyTipSection
+                    .padding(.bottom, 25)
             }
             .frame(maxWidth: .infinity)
         }

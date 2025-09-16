@@ -78,6 +78,7 @@ struct YourRoutineReadyView: View {
     
     func moveToHomeScreen() {
         CoreDataManager.shared.createBaseRoutineIfNeeded()
+        UserDefaultManager.shared.startDate = Date()
         UserDefaultManager.shared.isOnboardingFinished = true
         AppState.shared.moveToHomeTab()
     }

@@ -10,6 +10,7 @@ import Foundation
 
 enum UserDefaultKey {
     static let isOnboardingFinished = "isOnboardingFinished"
+    static let startDate = "startDate"
     static let skinType = "skinType"
     static let skinConcerns = "skinConcerns"
     static let skinGoal = "skinGoal"
@@ -28,6 +29,14 @@ class UserDefaultManager {
         }
     }
     
+    var startDate: Date {
+        get {
+            return UserDefaults.standard.date(forKey: UserDefaultKey.startDate)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKey.startDate)
+        }
+    }
     
     var skinType: SkinType {
         get {
@@ -60,5 +69,25 @@ class UserDefaultManager {
         set {
             defaults.set(newValue.rawValue, forKey: UserDefaultKey.skinType)
         }
+    }
+}
+
+extension UserDefaults {
+    
+    // MARK: - Date Storage Methods
+    
+    /// Save a date to UserDefaults
+    func set(_ date: Date?, forKey key: String) {
+        if let date = date {
+            self.set(date.timeIntervalSince1970, forKey: key)
+        } else {
+            self.removeObject(forKey: key)
+        }
+    }
+    
+    /// Retrieve a date from UserDefaults
+    func date(forKey key: String) -> Date {
+        let timeInterval = self.double(forKey: key)
+        return timeInterval > 0 ? Date(timeIntervalSince1970: timeInterval) : Date()
     }
 }

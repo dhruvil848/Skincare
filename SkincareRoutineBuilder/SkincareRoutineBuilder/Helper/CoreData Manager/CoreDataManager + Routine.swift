@@ -184,3 +184,94 @@ extension CoreDataManager {
     }
 
 }
+
+extension CoreDataManager {
+    
+    
+    
+    func fetchDay(for date: Date) -> SCDay? {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return nil }
+        
+        let fetchRequest: NSFetchRequest<SCDay> = SCDay.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date >= %@ AND date < %@", startOfDay as NSDate, endOfDay as NSDate)
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            return try context.fetch(fetchRequest).first
+        } catch {
+            print("Failed to fetch SCDay: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func fetchDays(from startDate: Date, to endDate: Date) -> [SCDay] {
+        var days: [SCDay] = []
+        let calendar = Calendar.current
+        var currentDate = calendar.startOfDay(for: startDate)
+        let endOfEndDate = calendar.startOfDay(for: endDate)
+        
+        var previousDay: SCDay? = nil
+        
+        while currentDate <= endOfEndDate {
+            if let day = fetchDay(for: currentDate) {
+                days.append(day)
+                previousDay = day
+            } else if let prev = previousDay {
+                let newDay = copySCDayForNewDay(from: prev, date: currentDate)
+                days.append(newDay)
+                previousDay = newDay
+            }
+            
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+        
+        return days
+    }
+
+    func copySCDayForNewDay(from day: SCDay, date: Date) -> SCDay {
+        let copy = SCDay(context: context)
+        copy.id = UUID()
+        copy.date = date
+        copy.isCompleted = false
+        
+        if let routines = day.routines?.array as? [SCRoutine] {
+            let routinesCopy = routines.map { routine -> SCRoutine in
+                let rCopy = SCRoutine(context: context)
+                rCopy.id = UUID()
+                rCopy.name = routine.name
+                rCopy.templateId = routine.templateId
+                rCopy.isCompleted = false
+                
+                if let steps = routine.steps?.array as? [SCRoutineStep] {
+                    let stepsCopy = steps.map { step -> SCRoutineStep in
+                        let sCopy = SCRoutineStep(context: context)
+                        sCopy.id = UUID()
+                        sCopy.displayOrder = step.displayOrder
+                        sCopy.isCompleted = false
+                        // Optionally copy product or keep reference
+                        if let product = step.product {
+                            let pCopy = SCProduct(context: context)
+                            pCopy.id = UUID()
+                            pCopy.name = product.name
+                            pCopy.type = product.type
+                            pCopy.frequency = product.frequency
+                            pCopy.timeOfDay = product.timeOfDay
+                            sCopy.product = pCopy
+                        }
+                        sCopy.templateId = step.templateId
+                        return sCopy
+                    }
+                    rCopy.steps = NSOrderedSet(array: stepsCopy)
+                }
+                
+                return rCopy
+            }
+            copy.routines = NSOrderedSet(array: routinesCopy)
+        }
+        
+        return copy
+    }
+
+}

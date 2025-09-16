@@ -48,6 +48,8 @@
 		04A3DDAC2E7510C30055C5A2 /* WhatSkinConcernView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A3DD832E7510C30055C5A2 /* WhatSkinConcernView.swift */; };
 		04A3DDAD2E7510C30055C5A2 /* WhatSkinTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A3DD842E7510C30055C5A2 /* WhatSkinTypeView.swift */; };
 		04A3DDAE2E7510C30055C5A2 /* YourRoutineReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A3DD852E7510C30055C5A2 /* YourRoutineReadyView.swift */; };
+		04A3DDC22E792F690055C5A2 /* AnalysisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A3DDBF2E792F690055C5A2 /* AnalysisViewModel.swift */; };
+		04A3DDC32E792F690055C5A2 /* SCCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A3DDC02E792F690055C5A2 /* SCCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,8 @@
 		04A3DD832E7510C30055C5A2 /* WhatSkinConcernView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatSkinConcernView.swift; sourceTree = "<group>"; };
 		04A3DD842E7510C30055C5A2 /* WhatSkinTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatSkinTypeView.swift; sourceTree = "<group>"; };
 		04A3DD852E7510C30055C5A2 /* YourRoutineReadyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourRoutineReadyView.swift; sourceTree = "<group>"; };
+		04A3DDBF2E792F690055C5A2 /* AnalysisViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisViewModel.swift; sourceTree = "<group>"; };
+		04A3DDC02E792F690055C5A2 /* SCCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,7 +260,9 @@
 		04A3DD722E7510C30055C5A2 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				04A3DDC12E792F690055C5A2 /* Component */,
 				04A3DD712E7510C30055C5A2 /* AnalysisView.swift */,
+				04A3DDBF2E792F690055C5A2 /* AnalysisViewModel.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -336,6 +342,14 @@
 				04A3DD802E7510C30055C5A2 /* Main Tab */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04A3DDC12E792F690055C5A2 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				04A3DDC02E792F690055C5A2 /* SCCalendarView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,7 +457,9 @@
 				04A3DDA62E7510C30055C5A2 /* HomeView.swift in Sources */,
 				04A3DDA02E7510C30055C5A2 /* View + Custom.swift in Sources */,
 				04A3DD892E7510C30055C5A2 /* SCNavTitle.swift in Sources */,
+				04A3DDC32E792F690055C5A2 /* SCCalendarView.swift in Sources */,
 				04A3DD9C2E7510C30055C5A2 /* Routine.swift in Sources */,
+				04A3DDC22E792F690055C5A2 /* AnalysisViewModel.swift in Sources */,
 				04A3DDA82E7510C30055C5A2 /* HomeTabView.swift in Sources */,
 				04A3DD4C2E7510B40055C5A2 /* SkincareDataModel.xcdatamodeld in Sources */,
 				04A3DD902E7510C30055C5A2 /* CoreDataManager + Routine.swift in Sources */,
