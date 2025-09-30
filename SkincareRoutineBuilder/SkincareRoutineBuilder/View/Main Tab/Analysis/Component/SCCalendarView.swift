@@ -10,12 +10,10 @@ import SwiftUI
 struct SCCalendarView: View {
     @ObservedObject var viewModel: AnalysisViewModel
     @State private var currentMonth: Date = Date()
-    
-    var startDate = UserDefaultManager.shared.startDate
     let today: Date = Date()
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center, spacing: 0) {
             HStack {
                 Button(action: { previousMonth() }) {
                     Image(systemName: "chevron.left")
@@ -34,7 +32,7 @@ struct SCCalendarView: View {
                 }
                 .disabled(!canGoNextMonth)
             }
-            .padding(20)
+            .padding(.vertical, 20)
             
             // Calendar Grid
             let days = generateDays(for: currentMonth)
@@ -50,8 +48,9 @@ struct SCCalendarView: View {
                 // Calendar days
                 ForEach(days, id: \.self) { date in
                     if let date = date {
-                        let borderColor = getDayColor(for: date)
-                        let textColor = borderColor
+                        let textColor = viewModel.getDayColor(for: date)
+                        let backgroundColor = textColor.opacity(0.1)
+                        let borderColor = Calendar.current.isDate(date, inSameDayAs: viewModel.selectedDateInCalendar) ? textColor : .clear
 
                         VStack(spacing: 4) {
                             Text("\(Calendar.current.component(.day, from: date))")
@@ -62,12 +61,15 @@ struct SCCalendarView: View {
                         .padding(5)
                         .background(
                             Circle()
-                                .stroke(.clear, lineWidth: 0.5)
+                                .stroke(borderColor, lineWidth: 1)
                                 .background(
                                     Circle()
-                                        .fill(borderColor.opacity(0.2))
+                                        .fill(backgroundColor)
                                 )
                         )
+                        .onTapGesture {
+                            viewModel.loadSelectedDay(from: date)
+                        }
                     } else {
                         Text("")
                             .frame(maxWidth: .infinity, minHeight: 40)
@@ -75,8 +77,9 @@ struct SCCalendarView: View {
                 }
 
             }
-            .padding(20)
+            .padding(.bottom, 20)
         }
+        .padding(.horizontal, 20)
     }
     
     // MARK: - Navigation
@@ -88,7 +91,7 @@ struct SCCalendarView: View {
 
     private var canGoPreviousMonth: Bool {
         let calendar = Calendar.current
-        let startOfStartMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: startDate))!
+        let startOfStartMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: viewModel.startDate))!
         return normalizedCurrentMonth > startOfStartMonth
     }
 
@@ -145,29 +148,5 @@ struct SCCalendarView: View {
         }
         
         return days
-    }
-    
-    func getDayColor(for date: Date) -> Color {
-        if Calendar.current.isDateInToday(date) {
-            return Color.scPurple
-        }
-        
-        guard let day = CoreDataManager.shared.fetchDay(for: date) else {
-            return Color.gray
-        }
-        
-        guard let routines = day.routines?.array as? [SCRoutine], !routines.isEmpty else {
-            return Color.gray
-        }
-        
-        let completedCount = routines.filter { $0.isCompleted }.count
-        
-        if completedCount == routines.count {
-            return Color.green
-        } else if completedCount > 0 {
-            return Color.orange
-        } else {
-            return Color.gray
-        }
     }
 }
